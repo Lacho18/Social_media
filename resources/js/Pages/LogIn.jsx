@@ -1,9 +1,7 @@
 import { useForm } from "@inertiajs/react";
-import { useState } from "react";
 import Layout from "./Layout";
 
 export default function LogIn() {
-    const [logInData, setLogInData] = useState({});
     const { data, setData, post, processing, errors } = useForm({
         email: "",
         password: "",

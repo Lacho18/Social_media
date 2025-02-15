@@ -1,9 +1,29 @@
+import { useForm } from "@inertiajs/react";
 import Layout from "./Layout";
 
 export default function SignUp() {
+    const { data, setData, post, processing, errors } = useForm({
+        email: "",
+        firstName: "",
+        lastName: "",
+        dateOfBirth: new Date(),
+        password: "",
+        password_confirmation: "",
+    });
+
+    function changeHandler(e) {
+        setData(e.target.name, e.target.value);
+    }
+
+    function submitHandler(e) {
+        e.preventDefault();
+
+        post("/signup");
+    }
+
     return (
         <Layout>
-            <form className="flex flex-col gap-3">
+            <form className="flex flex-col gap-3" onSubmit={submitHandler}>
                 <div className="flex flex-col">
                     <label for="email" className="text-left text-gray-300 mb-1">
                         Enter your <span className="font-bold">email</span>
@@ -12,6 +32,8 @@ export default function SignUp() {
                         type="text"
                         className="p-2 rounder bg-blue-200"
                         name="email"
+                        value={data.email}
+                        onChange={changeHandler}
                         placeholder="Email"
                     />
                 </div>
@@ -27,6 +49,8 @@ export default function SignUp() {
                         type="text"
                         className="p-2 rounder bg-blue-200"
                         name="firstName"
+                        value={data.firstName}
+                        onChange={changeHandler}
                         placeholder="First name"
                     />
                 </div>
@@ -42,6 +66,8 @@ export default function SignUp() {
                         type="text"
                         className="p-2 rounder bg-blue-200"
                         name="lastName"
+                        value={data.lastName}
+                        onChange={changeHandler}
                         placeholder="Last name"
                     />
                 </div>
@@ -57,6 +83,8 @@ export default function SignUp() {
                         type="date"
                         className="p-2 rounder bg-blue-200"
                         name="dateOfBirth"
+                        value={data.dateOfBirth}
+                        onChange={changeHandler}
                     />
                 </div>
 
@@ -71,6 +99,8 @@ export default function SignUp() {
                         type="password"
                         className="p-2 rounder bg-blue-200"
                         name="password"
+                        value={data.password}
+                        onChange={changeHandler}
                         placeholder="Password"
                     />
                 </div>
@@ -86,6 +116,8 @@ export default function SignUp() {
                         type="password"
                         className="p-2 rounder bg-blue-200"
                         name="password_confirmation"
+                        value={data.password_confirmation}
+                        onChange={changeHandler}
                         placeholder="Confirm password"
                     />
                 </div>

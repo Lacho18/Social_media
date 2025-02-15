@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding LogIn page structure"
+git commit -m "Making SignUp and LogIn functions that sends data to the backend UserController"
 git branch -M main
 git push -u origin main

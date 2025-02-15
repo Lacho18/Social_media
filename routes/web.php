@@ -12,4 +12,6 @@ Route::inertia('/signup', 'SignUp');
 
 Route::inertia('/login', 'LogIn');
 
+Route::post('/signup', [UserController::class, 'signup']);
+
 Route::post('/login', [UserController::class, 'login']);
