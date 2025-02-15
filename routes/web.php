@@ -8,8 +8,8 @@ Route::get('/', function () {
     return Inertia('Home', ["name" => "Lachezar"]);
 });
 
-Route::get('/login', function() {
-    return Inertia('LogIn');
-});
+Route::inertia('/signup', 'SignUp');
+
+Route::inertia('/login', 'LogIn');
 
 Route::post('/login', [UserController::class, 'login']);

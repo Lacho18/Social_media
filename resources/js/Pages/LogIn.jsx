@@ -1,5 +1,6 @@
 import { useForm } from "@inertiajs/react";
 import { useState } from "react";
+import Layout from "./Layout";
 
 export default function LogIn() {
     const [logInData, setLogInData] = useState({});
@@ -22,7 +23,7 @@ export default function LogIn() {
     }
 
     return (
-        <div>
+        <Layout>
             <form onSubmit={submitHandler}>
                 <div>
                     <label for="email">Email</label>
@@ -48,6 +49,6 @@ export default function LogIn() {
 
                 <input type="submit" value="Submit" />
             </form>
-        </div>
+        </Layout>
     );
 }
