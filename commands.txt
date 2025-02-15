@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding SignUp page structure"
+git commit -m "Adding LogIn page structure"
 git branch -M main
 git push -u origin main

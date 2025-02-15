@@ -92,7 +92,7 @@ export default function SignUp() {
 
                 <input
                     type="submit"
-                    value="Submit"
+                    value="Sign up"
                     class="bg-cyan-400 hover:bg-cyan-500 text-white font-semibold py-2 px-4 rounded shadow-lg mt-4"
                 />
             </form>
