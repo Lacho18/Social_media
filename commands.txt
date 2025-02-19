@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding creating user functionality"
+git commit -m "Adding log in functionality, sessions, profile page and route"
 git branch -M main
 git push -u origin main

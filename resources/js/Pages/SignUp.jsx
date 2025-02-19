@@ -25,7 +25,10 @@ export default function SignUp() {
         <Layout>
             <form className="flex flex-col gap-3" onSubmit={submitHandler}>
                 <div className="flex flex-col">
-                    <label for="email" className="text-left text-gray-300 mb-1">
+                    <label
+                        htmlFor="email"
+                        className="text-left text-gray-300 mb-1"
+                    >
                         Enter your <span className="font-bold">email</span>
                     </label>
                     <input
@@ -43,7 +46,7 @@ export default function SignUp() {
 
                 <div className="flex flex-col">
                     <label
-                        for="firstName"
+                        htmlFor="firstName"
                         className="text-left text-gray-300 mb-1"
                     >
                         Enter your <span className="font-bold">first name</span>
@@ -63,7 +66,7 @@ export default function SignUp() {
 
                 <div className="flex flex-col">
                     <label
-                        for="lastName"
+                        htmlFor="lastName"
                         className="text-left text-gray-300 mb-1"
                     >
                         Enter your <span className="font-bold">last name</span>
@@ -83,7 +86,7 @@ export default function SignUp() {
 
                 <div className="flex flex-col">
                     <label
-                        for="dateOfBirth"
+                        htmlFor="dateOfBirth"
                         className="text-left text-gray-300 mb-1"
                     >
                         Enter your <span className="font-bold">birth date</span>
@@ -102,7 +105,7 @@ export default function SignUp() {
 
                 <div className="flex flex-col">
                     <label
-                        for="password"
+                        htmlFor="password"
                         className="text-left text-gray-300 mb-1"
                     >
                         Enter your <span className="font-bold">password</span>
@@ -122,7 +125,7 @@ export default function SignUp() {
 
                 <div className="flex flex-col">
                     <label
-                        for="password_confirmation"
+                        htmlFor="password_confirmation"
                         className="text-left text-gray-300 mb-1"
                     >
                         Confirm password
@@ -140,7 +143,7 @@ export default function SignUp() {
                 <input
                     type="submit"
                     value="Sign up"
-                    class="bg-cyan-400 hover:bg-cyan-500 text-white font-semibold py-2 px-4 rounded shadow-lg mt-4"
+                    className="bg-cyan-400 hover:bg-cyan-500 text-white font-semibold py-2 px-4 rounded shadow-lg mt-4"
                 />
             </form>
         </Layout>

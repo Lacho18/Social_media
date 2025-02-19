@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\User;
 
@@ -38,7 +39,8 @@ class UserController extends Controller
 
         $fields = $request->all();
 
-        User::create([
+        //Creating the user in the database
+        $user = User::create([
             'email' => $fields['email'],
             'password' => $fields['password'],
             'firstName' => $fields['firstName'],
@@ -49,16 +51,32 @@ class UserController extends Controller
             'likedPosts' => [],
             'personalPosts' => [],
         ]);
+
+        Auth::login($user);
+
+        return redirect()->route('profile');
     }
 
     public function login(Request $request) {
-
-        dd($request->all());
-
-        $request->validation([
-            'email' => 'required|unique:users|max:255|email',
+        // Validate input data
+        $request->validate([
+            'email' => 'required|max:255|email',
             'password' => 'required',
-            'rememberMe' => 'boolean'
         ]);
+
+        if (Auth::attempt([
+                'email' => $request->email,
+                'password' => $request->password
+            ], $request->rememberMe)) {
+            
+            $request->session()->regenerate();
+    
+            // Redirect to the /profile route after successful login
+            return Inertia::location(route('profile'));
+        }
+        
+        return back()->withErrors([
+            'email' => 'Invalid credentials. Please try again.'
+        ])->withInput();
     }
 }

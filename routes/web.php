@@ -12,6 +12,12 @@ Route::inertia('/signup', 'SignUp');
 
 Route::inertia('/login', 'LogIn');
 
+Route::get('/profile', function () {
+    return Inertia::render('Profile', [
+        'user' => Auth::user()
+    ]);
+})->name('profile')->middleware('auth');
+
 Route::post('/signup', [UserController::class, 'signup']);
 
 Route::post('/login', [UserController::class, 'login']);

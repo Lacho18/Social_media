@@ -17,6 +17,8 @@ export default function LogIn() {
     function submitHandler(e) {
         e.preventDefault();
 
+        console.log("Ehooo");
+
         post("/login");
     }
 
@@ -24,7 +26,10 @@ export default function LogIn() {
         <Layout>
             <form onSubmit={submitHandler} className="flex flex-col gap-3">
                 <div className="flex flex-col">
-                    <label for="email" className="text-left text-gray-300 mb-1">
+                    <label
+                        htmlFor="email"
+                        className="text-left text-gray-300 mb-1"
+                    >
                         Enter your email
                     </label>
                     <input
@@ -35,10 +40,13 @@ export default function LogIn() {
                         onChange={(e) => setData("email", e.target.value)}
                         placeholder="Enter email"
                     />
+                    {errors.email !== "" && (
+                        <p className="error">{errors.email}</p>
+                    )}
                 </div>
                 <div className="flex flex-col">
                     <label
-                        for="password"
+                        htmlFor="password"
                         className="text-left text-gray-300 mb-1"
                     >
                         Enter your password
@@ -51,6 +59,9 @@ export default function LogIn() {
                         onChange={(e) => setData("password", e.target.value)}
                         placeholder="Enter password"
                     />
+                    {errors.password !== "" && (
+                        <p className="error">{errors.password}</p>
+                    )}
                 </div>
                 <div className="flex justify-start gap-2">
                     <input
@@ -59,14 +70,14 @@ export default function LogIn() {
                         value={data.rememberMe}
                         onChange={(e) => setData("rememberMe", e.target.value)}
                     />
-                    <label for="rememberMe" className="text-gray-300">
+                    <label htmlFor="rememberMe" className="text-gray-300">
                         Remember me
                     </label>
                 </div>
                 <input
                     type="submit"
                     value="Log in"
-                    class="bg-cyan-400 hover:bg-cyan-500 text-white font-semibold py-2 px-4 rounded shadow-lg mt-4"
+                    className="bg-cyan-400 hover:bg-cyan-500 text-white font-semibold py-2 px-4 rounded shadow-lg mt-4"
                 />
             </form>
         </Layout>
