@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding data validation to Sign up and log in"
+git commit -m "Adding creating user functionality"
 git branch -M main
 git push -u origin main

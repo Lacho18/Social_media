@@ -7,6 +7,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -34,6 +35,20 @@ class UserController extends Controller
                 'data' => $request->all() 
             ]);
         }
+
+        $fields = $request->all();
+
+        User::create([
+            'email' => $fields['email'],
+            'password' => $fields['password'],
+            'firstName' => $fields['firstName'],
+            'lastName' => $fields['lastName'],
+            'dateOfBirth' => $fields['dateOfBirth'],
+            'friends' => [],
+            'comments' => [],
+            'likedPosts' => [],
+            'personalPosts' => [],
+        ]);
     }
 
     public function login(Request $request) {
