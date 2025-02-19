@@ -4,3 +4,11 @@
 
 @import "tailwindcss";
 @source "../views";
+
+.error {
+    font-size: 12px;
+    text-align: left;
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 4px;
+}

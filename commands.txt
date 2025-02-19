@@ -1,4 +1,4 @@
 git add .
-git commit -m "Making SignUp and LogIn functions that sends data to the backend UserController"
+git commit -m "Adding data validation to Sign up and log in"
 git branch -M main
 git push -u origin main

@@ -36,6 +36,9 @@ export default function SignUp() {
                         onChange={changeHandler}
                         placeholder="Email"
                     />
+                    {errors.email !== "" && (
+                        <p className="error">{errors.email}</p>
+                    )}
                 </div>
 
                 <div className="flex flex-col">
@@ -53,6 +56,9 @@ export default function SignUp() {
                         onChange={changeHandler}
                         placeholder="First name"
                     />
+                    {errors.firstName !== "" && (
+                        <p className="error">{errors.firstName}</p>
+                    )}
                 </div>
 
                 <div className="flex flex-col">
@@ -70,6 +76,9 @@ export default function SignUp() {
                         onChange={changeHandler}
                         placeholder="Last name"
                     />
+                    {errors.lastName !== "" && (
+                        <p className="error">{errors.lastName}</p>
+                    )}
                 </div>
 
                 <div className="flex flex-col">
@@ -86,6 +95,9 @@ export default function SignUp() {
                         value={data.dateOfBirth}
                         onChange={changeHandler}
                     />
+                    {errors.dateOfBirth !== "" && (
+                        <p className="error">{errors.dateOfBirth}</p>
+                    )}
                 </div>
 
                 <div className="flex flex-col">
@@ -103,6 +115,9 @@ export default function SignUp() {
                         onChange={changeHandler}
                         placeholder="Password"
                     />
+                    {errors.password !== "" && (
+                        <p className="error">{errors.password}</p>
+                    )}
                 </div>
 
                 <div className="flex flex-col">
