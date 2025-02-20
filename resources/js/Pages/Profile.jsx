@@ -16,8 +16,8 @@ export default function Profile() {
     }
 
     return (
-        <div>
-            <h1>Profile page</h1>
+        <div className="bg-gradient-to-r from-gray-900 via-blue-950 to-black min-h-screen w-screen flex justify-center items-center">
+            <div className="w-full h-10 bg-green-500"></div>
         </div>
     );
 }

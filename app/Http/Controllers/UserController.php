@@ -12,12 +12,6 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-
-    /*
-        Оправи заявките. Съобщения за грешки, валидации, сесии пренасочвания
-        Виж с постовете как да го направиш с онази команда
-    */
-
     public function signUp(Request $request) {
         //Validates data by given rules. On dateOfBirth setting custom error message
         $validator = Validator::make($request->all(), [
@@ -50,6 +44,7 @@ class UserController extends Controller
             'comments' => [],
             'likedPosts' => [],
             'personalPosts' => [],
+            'imagePath' => "null"
         ]);
 
         Auth::login($user);
@@ -78,5 +73,9 @@ class UserController extends Controller
         return back()->withErrors([
             'email' => 'Invalid credentials. Please try again.'
         ])->withInput();
+    }
+
+    public function updateUserImage(Request $request) {
+        dd("Hello");
     }
 }
