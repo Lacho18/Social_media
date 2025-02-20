@@ -93,15 +93,18 @@ class UserController extends Controller
     
             // Measure query execution time
             $startTime = microtime(true);
+
+            $url = asset("storage/usersImages/" . $filename);
     
-            DB::transaction(function () use ($id, $filename) {
-                User::where('id', $id)->limit(1)->update(['imagePath' => $filename]);
+            DB::transaction(function () use ($id, $url) {
+                User::where('id', $id)->limit(1)->update(['imagePath' => $url]);
             });
     
             $executionTime = microtime(true) - $startTime;
             Log::info("Query executed in: {$executionTime} seconds");
-    
-            return response()->json(['message' => "Image uploaded successfully", 'filename' => $filename], 201);
+
+
+            return response()->json(['message' => "Image uploaded successfully", 'image' => $url], 201);
         } catch (\Exception $e) {
             Log::error("Image update failed: " . $e->getMessage());
             return response()->json(['error' => "Something went wrong"], 500);

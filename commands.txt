@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding functionality to upload image and update user imagePath field"
+git commit -m "Correcting the data to store the actual url that the Frontend can visualize of the user profile image"
 git branch -M main
 git push -u origin main

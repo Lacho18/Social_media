@@ -7,6 +7,8 @@ import AskWindow from "./ProfileComponents/AskWindow";
 export default function Profile() {
     const { user } = usePage().props;
 
+    console.log(user);
+
     const { data, setData, post, errors } = useForm({
         image: null,
     });
@@ -14,7 +16,11 @@ export default function Profile() {
     const [changeProfileImage, setChangeProfileImage] = useState(false);
 
     function setNewImage() {
-        post("/userImage/" + user.id);
+        post("/userImage/" + user.id, {
+            onSuccess: ({ props }) => {
+                user.imagePath = props.image;
+            },
+        });
     }
 
     if (!user) {
