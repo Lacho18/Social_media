@@ -1,5 +1,6 @@
 import { usePage } from "@inertiajs/react";
 import Layout from "./Layout";
+import Header from "./ProfileComponents/Header";
 
 export default function Profile() {
     const { user } = usePage().props;
@@ -16,8 +17,12 @@ export default function Profile() {
     }
 
     return (
-        <div className="bg-gradient-to-r from-gray-900 via-blue-950 to-black min-h-screen w-screen flex justify-center items-center">
-            <div className="w-full h-10 bg-green-500"></div>
+        <div className="bg-gradient-to-r from-gray-900 via-blue-950 to-black min-h-screen w-screen flex flex-col">
+            <Header
+                image={user.imagePath}
+                firstName={user.firstName}
+                lastName={user.lastName}
+            />
         </div>
     );
 }

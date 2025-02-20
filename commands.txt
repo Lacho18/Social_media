@@ -1,4 +1,4 @@
 git add .
-git commit -m "Added image field to the users table"
+git commit -m "Creating Profile header"
 git branch -M main
 git push -u origin main
