@@ -103,8 +103,10 @@ class UserController extends Controller
             $executionTime = microtime(true) - $startTime;
             Log::info("Query executed in: {$executionTime} seconds");
 
-
-            return response()->json(['message' => "Image uploaded successfully", 'image' => $url], 201);
+            return Inertia::render('Profile', [
+                'message' => "Successful request",
+                'image' => $url,
+            ]);
         } catch (\Exception $e) {
             Log::error("Image update failed: " . $e->getMessage());
             return response()->json(['error' => "Something went wrong"], 500);

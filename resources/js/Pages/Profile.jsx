@@ -15,10 +15,16 @@ export default function Profile() {
 
     const [changeProfileImage, setChangeProfileImage] = useState(false);
 
+    //A state that visualize the updated profile image dinamicaly
+    const [userImage, setUserImage] = useState(user.imagePath);
+
     function setNewImage() {
         post("/userImage/" + user.id, {
+            preserveState: true,
+            preserveScroll: true,
+            only: ["image"],
             onSuccess: ({ props }) => {
-                user.imagePath = props.image;
+                setUserImage(props.image);
             },
         });
     }
@@ -37,7 +43,7 @@ export default function Profile() {
     return (
         <div className="bg-gradient-to-r from-gray-900 via-blue-950 to-black min-h-screen w-screen flex flex-col">
             <Header
-                image={user.imagePath}
+                image={userImage}
                 firstName={user.firstName}
                 lastName={user.lastName}
                 onImageClick={() => setChangeProfileImage(true)}

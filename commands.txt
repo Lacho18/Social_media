@@ -1,4 +1,4 @@
 git add .
-git commit -m "Correcting the data to store the actual url that the Frontend can visualize of the user profile image"
+git commit -m "Updating the image immediately after the new image is added"
 git branch -M main
 git push -u origin main
