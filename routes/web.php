@@ -18,7 +18,7 @@ Route::get('/profile', function () {
     ]);
 })->name('profile')->middleware('auth');
 
-Route::post('/userImage', [UserController::class, 'updateUserImage']);
+Route::post('/userImage/{id}', [UserController::class, 'updateUserImage']);
 
 Route::post('/signup', [UserController::class, 'signup']);
 

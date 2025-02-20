@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding component for selecting image"
+git commit -m "Adding functionality to upload image and update user imagePath field"
 git branch -M main
 git push -u origin main

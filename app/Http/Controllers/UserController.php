@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+
 class UserController extends Controller
 {
     public function signUp(Request $request) {
@@ -75,7 +79,33 @@ class UserController extends Controller
         ])->withInput();
     }
 
-    public function updateUserImage(Request $request) {
-        dd($request->all());
+    public function updateUserImage(Request $request, $id) {
+        try {
+            Log::info("Updating image for user ID: $id");
+    
+            if (!$request->hasFile('image')) {
+                return response()->json(['error' => 'No image uploaded'], 400);
+            }
+    
+            // Store image properly
+            $filename = $request->file('image')->store("usersImages", 'public');
+            $filename = basename($filename);
+    
+            // Measure query execution time
+            $startTime = microtime(true);
+    
+            DB::transaction(function () use ($id, $filename) {
+                User::where('id', $id)->limit(1)->update(['imagePath' => $filename]);
+            });
+    
+            $executionTime = microtime(true) - $startTime;
+            Log::info("Query executed in: {$executionTime} seconds");
+    
+            return response()->json(['message' => "Image uploaded successfully", 'filename' => $filename], 201);
+        } catch (\Exception $e) {
+            Log::error("Image update failed: " . $e->getMessage());
+            return response()->json(['error' => "Something went wrong"], 500);
+        }
     }
+    
 }

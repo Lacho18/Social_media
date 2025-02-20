@@ -14,7 +14,7 @@ export default function Profile() {
     const [changeProfileImage, setChangeProfileImage] = useState(false);
 
     function setNewImage() {
-        post("/userImage");
+        post("/userImage/" + user.id);
     }
 
     if (!user) {
