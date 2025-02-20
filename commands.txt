@@ -1,4 +1,4 @@
 git add .
-git commit -m "Creating Profile header"
+git commit -m "Adding component for selecting image"
 git branch -M main
 git push -u origin main

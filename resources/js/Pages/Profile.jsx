@@ -1,9 +1,21 @@
-import { usePage } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 import Layout from "./Layout";
 import Header from "./ProfileComponents/Header";
+import { useState } from "react";
+import AskWindow from "./ProfileComponents/AskWindow";
 
 export default function Profile() {
     const { user } = usePage().props;
+
+    const { data, setData, post, errors } = useForm({
+        image: null,
+    });
+
+    const [changeProfileImage, setChangeProfileImage] = useState(false);
+
+    function setNewImage() {
+        post("/userImage");
+    }
 
     if (!user) {
         return (
@@ -22,7 +34,15 @@ export default function Profile() {
                 image={user.imagePath}
                 firstName={user.firstName}
                 lastName={user.lastName}
+                onImageClick={() => setChangeProfileImage(true)}
             />
+            {changeProfileImage && (
+                <AskWindow
+                    closeWindow={() => setChangeProfileImage(false)}
+                    setNewImage={setNewImage}
+                    setData={setData}
+                />
+            )}
         </div>
     );
 }

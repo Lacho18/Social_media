@@ -17,8 +17,6 @@ export default function LogIn() {
     function submitHandler(e) {
         e.preventDefault();
 
-        console.log("Ehooo");
-
         post("/login");
     }
 

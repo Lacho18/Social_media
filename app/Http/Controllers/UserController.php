@@ -76,6 +76,6 @@ class UserController extends Controller
     }
 
     public function updateUserImage(Request $request) {
-        dd("Hello");
+        dd($request->all());
     }
 }

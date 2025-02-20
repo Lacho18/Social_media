@@ -1,9 +1,10 @@
-export default function Header({ image, firstName, lastName }) {
+export default function Header({ image, firstName, lastName, onImageClick }) {
     return (
         <div className="flex w-full h-16 bg-blue-900 justify-between items-center pl-4 pr-4">
             <div className="flex gap-3 items-center">
                 <img
                     className="w-12 h-12 rounded-full"
+                    onClick={onImageClick}
                     src={
                         image !== "null"
                             ? image
