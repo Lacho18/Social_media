@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding others /profile components"
+git commit -m "Adding menu component to the header"
 git branch -M main
 git push -u origin main

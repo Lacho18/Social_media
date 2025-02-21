@@ -1,4 +1,9 @@
+import { useState } from "react";
+import MenusView from "./MenusView";
+
 export default function Header({ image, firstName, lastName, onImageClick }) {
+    const [menu, setMenu] = useState(false);
+
     return (
         <div className="flex w-full h-16 bg-blue-900 justify-between items-center pl-4 pr-4">
             <div className="flex gap-3 items-center">
@@ -20,13 +25,17 @@ export default function Header({ image, firstName, lastName, onImageClick }) {
                 <input type="text" placeholder="🔍 Search" />
             </div>
             <div>
-                <button className="w-12 h-12">
+                <button
+                    className="w-12 h-12"
+                    onClick={() => setMenu((oldValue) => !oldValue)}
+                >
                     <img
                         className="w-full h-full"
                         src="https://www.freeiconspng.com/thumbs/menu-icon/menu-icon-24.png"
                     />
                 </button>
             </div>
+            {menu && <MenusView />}
         </div>
     );
 }

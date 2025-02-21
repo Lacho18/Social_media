@@ -3,6 +3,9 @@ import Layout from "./Layout";
 import Header from "./ProfileComponents/Header";
 import { useState } from "react";
 import AskWindow from "./ProfileComponents/AskWindow";
+import FriendsSideBar from "./ProfileComponents/FriendsSideBar";
+import PostsView from "./ProfileComponents/PostsView";
+import RecommendationsSideBar from "./ProfileComponents/RecommendationsSideBar";
 
 export default function Profile() {
     const { user } = usePage().props;
@@ -49,6 +52,11 @@ export default function Profile() {
                 lastName={user.lastName}
                 onImageClick={() => setChangeProfileImage(true)}
             />
+            <div className="max-h-screen flex text-white">
+                <FriendsSideBar />
+                <PostsView />
+                <RecommendationsSideBar />
+            </div>
             {changeProfileImage && (
                 <AskWindow
                     closeWindow={() => setChangeProfileImage(false)}
