@@ -87,22 +87,26 @@ class UserController extends Controller
                 return response()->json(['error' => 'No image uploaded'], 400);
             }
     
-            // Store image properly
+            // Store image in storage/app/public/userImages
             $filename = $request->file('image')->store("usersImages", 'public');
             $filename = basename($filename);
     
             // Measure query execution time
             $startTime = microtime(true);
 
+            //Gets the image $url
             $url = asset("storage/usersImages/" . $filename);
     
+            //Stores the image url to the database as imagePath field
             DB::transaction(function () use ($id, $url) {
                 User::where('id', $id)->limit(1)->update(['imagePath' => $url]);
             });
     
+            //End of execution time
             $executionTime = microtime(true) - $startTime;
             Log::info("Query executed in: {$executionTime} seconds");
 
+            //Returning the new url image in order to visualize it dynamically
             return Inertia::render('Profile', [
                 'message' => "Successful request",
                 'image' => $url,

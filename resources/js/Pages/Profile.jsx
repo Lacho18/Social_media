@@ -15,9 +15,10 @@ export default function Profile() {
 
     const [changeProfileImage, setChangeProfileImage] = useState(false);
 
-    //A state that visualize the updated profile image dinamicaly
+    //A state that visualize the updated profile image dynamically
     const [userImage, setUserImage] = useState(user.imagePath);
 
+    //Updates profile image
     function setNewImage() {
         post("/userImage/" + user.id, {
             preserveState: true,
