@@ -1,4 +1,4 @@
 git add .
-git commit -m "Added recommendation view"
+git commit -m "Added recommendation request and functionality"
 git branch -M main
 git push -u origin main

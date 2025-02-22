@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GetUsersController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -25,5 +26,9 @@ Route::post('/signup', [UserController::class, 'signup']);
 Route::post('/login', [UserController::class, 'login']);
 
 Route::post('/logout', [UserController::class, 'logout']);
+
+Route::prefix('findUsers')->group(function () {
+    Route::get('/recommendations/{currentUserID}', [GetUsersController::class, 'getRecommendations']);
+});
 
 Route::inertia('/*', 'NotFound');
