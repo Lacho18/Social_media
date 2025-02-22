@@ -1,4 +1,8 @@
-export default function ProfileSideBar({ user, addButton }) {
+export default function ProfileSideBar({
+    user,
+    addButton,
+    friendRequestHandler,
+}) {
     console.log(user.image);
     return (
         <div
@@ -21,7 +25,10 @@ export default function ProfileSideBar({ user, addButton }) {
             </div>
             <div className="flex items-center">
                 {addButton && (
-                    <button className="bg-blue-950 p-2 rounded-xl border-2 border-blue-800">
+                    <button
+                        className="bg-blue-950 p-2 rounded-xl border-2 border-blue-800"
+                        onClick={() => friendRequestHandler(user.id)}
+                    >
                         Add friend
                     </button>
                 )}

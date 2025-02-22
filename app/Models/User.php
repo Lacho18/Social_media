@@ -39,7 +39,7 @@ class User extends Authenticatable
     protected $cast = [
         'sendedRequests' => 'array',
         'requests' => 'array',
-    ]
+    ];
 
     /**
      * Get the attributes that should be cast.

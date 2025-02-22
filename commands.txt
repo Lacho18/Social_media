@@ -1,4 +1,4 @@
 git add .
-git commit -m "Created a friend request handler function"
+git commit -m "Added function for sending friend request"
 git branch -M main
 git push -u origin main

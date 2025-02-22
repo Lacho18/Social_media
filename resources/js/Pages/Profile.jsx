@@ -6,11 +6,10 @@ import AskWindow from "./ProfileComponents/AskWindow";
 import FriendsSideBar from "./ProfileComponents/FriendsSideBar";
 import PostsView from "./ProfileComponents/PostsView";
 import RecommendationsSideBar from "./ProfileComponents/RecommendationsSideBar";
+import axios from "axios";
 
 export default function Profile() {
     const { user } = usePage().props;
-
-    console.log(user);
 
     const { data, setData, post, errors } = useForm({
         image: null,
@@ -20,6 +19,9 @@ export default function Profile() {
 
     //A state that visualize the updated profile image dynamically
     const [userImage, setUserImage] = useState(user.imagePath);
+
+    //A state to change the add button on recommendations to something else after ending request
+    const [sendedRequests, setSendedRequests] = useState(user.sendedRequests);
 
     //Updates profile image
     function setNewImage() {
@@ -31,6 +33,26 @@ export default function Profile() {
                 setUserImage(props.image);
             },
         });
+    }
+
+    //Function that handles a friend request send
+    async function friendRequestHandler(receiverId) {
+        console.log("Nigga 1");
+
+        const response = await axios.post(`/findUsers/friendRequest`, {
+            senderId: user.id,
+            receiverId: receiverId,
+        });
+
+        console.log("Nigga 2");
+
+        if (response.status === 200) {
+            setSendedRequests((oldValue) => {
+                const newValue = response.data.user.sendedRequests;
+
+                return newValue;
+            });
+        }
     }
 
     if (!user) {
@@ -55,7 +77,10 @@ export default function Profile() {
             <div className="h-[calc(100vh-70px)] flex text-white">
                 <FriendsSideBar />
                 <PostsView />
-                <RecommendationsSideBar currentUserId={user.id} />
+                <RecommendationsSideBar
+                    currentUserId={user.id}
+                    friendRequestHandler={friendRequestHandler}
+                />
             </div>
             {changeProfileImage && (
                 <AskWindow
