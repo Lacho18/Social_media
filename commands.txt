@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding logout functionality"
+git commit -m "Adding 404 page"
 git branch -M main
 git push -u origin main
