@@ -23,6 +23,9 @@ return new class extends Migration
             $table->json('comments')->default(json_encode([]));
             $table->json('likedPosts')->default(json_encode([]));
             $table->json('personalPosts')->default(json_encode([]));
+            $table->json('requests')->default(json_encode([]));
+            $table->json('sendedRequest')->default(json_encode([]));
+            $table->json('rejectedRequests')->default(json_encode([]));
             $table->string('imagePath');
             $table->rememberToken();
             $table->timestamps();

@@ -29,6 +29,7 @@ Route::post('/logout', [UserController::class, 'logout']);
 
 Route::prefix('findUsers')->group(function () {
     Route::get('/recommendations/{currentUserID}', [GetUsersController::class, 'getRecommendations']);
+    Route::post('/friendRequest/{fromUser}/{toUser}', [GetUsersController::class], 'friendRequest');
 });
 
 Route::inertia('/*', 'NotFound');

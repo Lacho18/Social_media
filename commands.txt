@@ -1,4 +1,4 @@
 git add .
-git commit -m "Added recommendation request and functionality"
+git commit -m "Adding new columns to users table"
 git branch -M main
 git push -u origin main

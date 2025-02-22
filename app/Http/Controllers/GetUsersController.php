@@ -28,4 +28,8 @@ class GetUsersController extends Controller
             return response()->json(['message' => "I don't know"]);
         }
     }
+
+    public function friendRequest(Request $request, $fromUser, $toUser) {
+
+    }
 }
