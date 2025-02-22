@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding new columns to users table"
+git commit -m "Created a friend request handler function"
 git branch -M main
 git push -u origin main
