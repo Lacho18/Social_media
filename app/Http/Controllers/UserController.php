@@ -79,6 +79,10 @@ class UserController extends Controller
         ])->withInput();
     }
 
+    public function logout(Request $request) {
+        dd("Nigga");
+    }
+
     public function updateUserImage(Request $request, $id) {
         try {
             Log::info("Updating image for user ID: $id");
