@@ -1,4 +1,4 @@
 git add .
-git commit -m "Inserting 10 users into database using factory"
+git commit -m "Adding logout functionality"
 git branch -M main
 git push -u origin main

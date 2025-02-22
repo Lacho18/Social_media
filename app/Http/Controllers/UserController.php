@@ -80,7 +80,12 @@ class UserController extends Controller
     }
 
     public function logout(Request $request) {
-        dd("Nigga");
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 
     public function updateUserImage(Request $request, $id) {
