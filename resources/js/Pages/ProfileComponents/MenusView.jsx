@@ -8,7 +8,7 @@ export default function MenusView() {
     }
 
     return (
-        <div className="absolute w-1/5 bg-blue-900 mt-20 left-3/4">
+        <div className="absolute w-1/5 bg-blue-900 mt-20 left-3/4 overflow-hidden">
             <button onClick={logoutHandler}>Log out</button>
         </div>
     );

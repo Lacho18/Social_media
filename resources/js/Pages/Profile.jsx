@@ -52,7 +52,7 @@ export default function Profile() {
                 lastName={user.lastName}
                 onImageClick={() => setChangeProfileImage(true)}
             />
-            <div className="max-h-screen flex text-white">
+            <div className="h-[calc(100vh-70px)] flex text-white">
                 <FriendsSideBar />
                 <PostsView />
                 <RecommendationsSideBar />
