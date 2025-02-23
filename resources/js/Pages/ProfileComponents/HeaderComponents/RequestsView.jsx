@@ -1,15 +1,31 @@
-export default function RequestsView({ userRequests }) {
-    const date = new Date(userRequests[0].madeAtDate);
-    console.log(date.getDate());
+import axios from "axios";
+
+export default function RequestsView({ userRequests, userId }) {
+    async function yesButtonHandler(senderId) {
+        const response = await axios.post("/findUsers/acceptRequest", {
+            senderId: senderId,
+            receiverId: userId,
+        });
+
+        console.log(response.data.message);
+    }
+
+    async function noButtonHandler(senderId) {
+        const response = await axios.post("/findUsers/deniedRequest", {
+            senderId: senderId,
+            receiverId: userId,
+        });
+
+        console.log(response.data.message);
+    }
 
     return (
         <div
-            className="absolute w-3/5 min-h-64 max-h-68 overflow-scroll bg-blue-800 mt-20 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-hidden flex flex-col rounded-md"
+            className="absolute w-3/5 min-h-64 max-h-68 overflow-scroll bg-blue-800 mt-20 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col rounded-md"
             style={{ backgroundColor: "#516691", border: "1px solid #8fa3cc" }}
         >
             {userRequests.length > 0 ? (
                 userRequests.map((request) => {
-                    console.log(request);
                     const date = new Date(request.madeAtDate);
                     return (
                         <div
@@ -24,10 +40,24 @@ export default function RequestsView({ userRequests }) {
                                 <p className="self-end">{request.context}</p>
                                 {request.requiredAnswer && (
                                     <div className="self-end">
-                                        <button className="p-1 mr-4 bg-green-500">
+                                        <button
+                                            className="p-1 mr-4 bg-green-500"
+                                            onClick={() =>
+                                                yesButtonHandler(
+                                                    request.senderId
+                                                )
+                                            }
+                                        >
                                             Yes
                                         </button>
-                                        <button className="p-1 mr-4 bg-red-500">
+                                        <button
+                                            className="p-1 mr-4 bg-red-500"
+                                            onClick={() =>
+                                                noButtonHandler(
+                                                    request.senderId
+                                                )
+                                            }
+                                        >
                                             No
                                         </button>
                                     </div>

@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding visual of requests window"
+git commit -m "Added accept and reject structure methods"
 git branch -M main
 git push -u origin main

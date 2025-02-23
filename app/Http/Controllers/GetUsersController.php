@@ -48,6 +48,7 @@ class GetUsersController extends Controller
     
         $requestContext = $sender->firstName . " " . $sender->lastName . " sent you a friend request!";
         $newRequest = [
+            "senderId" => $sender->id,
             "context" => $requestContext,
             "senderImage" => $sender->imagePath !== "null" ? $sender->imagePath : "https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
             "requiredAnswer" => true,
@@ -74,5 +75,17 @@ class GetUsersController extends Controller
         $receiver->save();
     
         return response()->json(['message' => "Friend request sent successfully!", 'user' => $sender]);
-    }    
+    }   
+    
+    public function acceptRequest(Request $request) {
+        //dd($request->all());
+
+        return response()->json(['message' => "Are ve ey"]);
+    }
+
+    public function deniedRequest(Request $request) {
+        //dd($request->all());
+
+        return response()->json(['message' => "Are ve ey. SenderID = " . $request->senderId . " | ReceiverId = " . $request->receiverId]);
+    }
 }

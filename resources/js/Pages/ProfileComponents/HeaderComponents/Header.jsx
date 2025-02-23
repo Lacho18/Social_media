@@ -2,6 +2,7 @@ import { useState } from "react";
 import MenusView from "./MenusView";
 
 export default function Header({
+    userId,
     image,
     firstName,
     lastName,
@@ -41,7 +42,7 @@ export default function Header({
                     />
                 </button>
             </div>
-            {menu && <MenusView userRequests={userRequests} />}
+            {menu && <MenusView userRequests={userRequests} userId={userId} />}
         </div>
     );
 }

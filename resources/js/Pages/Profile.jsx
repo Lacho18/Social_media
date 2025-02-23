@@ -73,6 +73,7 @@ export default function Profile() {
     return (
         <div className="bg-gradient-to-r from-gray-900 via-blue-950 to-black min-h-screen w-screen flex flex-col">
             <Header
+                userId={user.id}
                 image={userImage}
                 firstName={user.firstName}
                 lastName={user.lastName}

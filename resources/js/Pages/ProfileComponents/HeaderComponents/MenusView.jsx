@@ -2,7 +2,7 @@ import { useForm } from "@inertiajs/react";
 import { useState } from "react";
 import RequestsView from "./RequestsView";
 
-export default function MenusView({ userRequests }) {
+export default function MenusView({ userRequests, userId }) {
     const { post } = useForm();
 
     const [requestsView, setRequestsView] = useState(false);
@@ -12,7 +12,7 @@ export default function MenusView({ userRequests }) {
     }
 
     if (requestsView) {
-        return <RequestsView userRequests={userRequests} />;
+        return <RequestsView userRequests={userRequests} userId={userId} />;
     }
 
     return (
