@@ -1,5 +1,6 @@
 import { useForm } from "@inertiajs/react";
 import { useState } from "react";
+import RequestsView from "./RequestsView";
 
 export default function MenusView({ userRequests }) {
     const { post } = useForm();
@@ -11,7 +12,7 @@ export default function MenusView({ userRequests }) {
     }
 
     if (requestsView) {
-        return <div>Nigga</div>;
+        return <RequestsView userRequests={userRequests} />;
     }
 
     return (
@@ -22,7 +23,10 @@ export default function MenusView({ userRequests }) {
             >
                 Log out
             </button>
-            <button className="p-1 text-white text-xl m-2 border-2 border-white rounded-xl">
+            <button
+                className="p-1 text-white text-xl m-2 border-2 border-white rounded-xl"
+                onClick={() => setRequestsView(true)}
+            >
                 {userRequests.length > 0 && (
                     <div className="w-5 h-5 text-sm bg-orange-500 absolute flex justify-center items-center rounded-full text-black font-bold">
                         <p>{userRequests.length}</p>

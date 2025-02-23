@@ -10,8 +10,6 @@ export default function Header({
 }) {
     const [menu, setMenu] = useState(false);
 
-    //Comment
-
     return (
         <div className="flex w-full h-16 bg-blue-900 justify-between items-center pl-4 pr-4">
             <div className="flex gap-3 items-center">

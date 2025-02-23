@@ -1,6 +1,6 @@
 import { useForm, usePage } from "@inertiajs/react";
 import Layout from "./Layout";
-import Header from "./ProfileComponents/Header";
+import Header from "./ProfileComponents/HeaderComponents/Header";
 import { useState } from "react";
 import AskWindow from "./ProfileComponents/AskWindow";
 import FriendsSideBar from "./ProfileComponents/FriendsSideBar";
