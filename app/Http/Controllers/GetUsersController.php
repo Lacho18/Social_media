@@ -17,7 +17,8 @@ class GetUsersController extends Controller
                 throw new Exception;
             }
 
-            $friendsArray = json_decode($currentUser->friends);
+            //$friendsArray = json_decode($currentUser->friends);
+            $friendsArray = $currentUser->friends;
             array_push($friendsArray, $currentUserID);
             $users = User::select('id', 'firstName', 'lastName', 'imagePath')->whereNotIn('id', $friendsArray)->limit(5)->get();
 

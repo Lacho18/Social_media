@@ -36,8 +36,12 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected $cast = [
-        'sendedRequests' => 'array',
+    protected $casts = [
+        'sendedRequest' => 'array',
+        'friends' => 'array',
+        'likedPosts' => 'array',
+        'personalPosts' => 'array',
+        'rejectedRequests' => 'array',
         'requests' => 'array',
     ];
 

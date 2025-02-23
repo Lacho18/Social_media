@@ -76,6 +76,7 @@ export default function Profile() {
                 image={userImage}
                 firstName={user.firstName}
                 lastName={user.lastName}
+                userRequests={user.requests}
                 onImageClick={() => setChangeProfileImage(true)}
             />
             <div className="h-[calc(100vh-70px)] flex text-white">

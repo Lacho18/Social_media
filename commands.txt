@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding visual update when sending request"
+git commit -m "Adding button for visualizing requests"
 git branch -M main
 git push -u origin main

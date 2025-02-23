@@ -4,7 +4,6 @@ export default function ProfileSideBar({
     friendRequestHandler,
     sendedRequests,
 }) {
-    console.log(sendedRequests);
     return (
         <div
             className="flex justify-between p-2 border-4 border-blue-700 rounded-3xl m-3"

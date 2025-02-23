@@ -10,8 +10,6 @@ export default function RecommendationsSideBar({
 }) {
     const [recommendedUsers, setRecommendedUsers] = useState([]);
 
-    console.log(sendedRequests);
-
     useEffect(() => {
         async function getRecommendations() {
             const response = await axios.get(

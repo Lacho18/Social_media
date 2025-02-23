@@ -1,7 +1,13 @@
 import { useState } from "react";
 import MenusView from "./MenusView";
 
-export default function Header({ image, firstName, lastName, onImageClick }) {
+export default function Header({
+    image,
+    firstName,
+    lastName,
+    userRequests,
+    onImageClick,
+}) {
     const [menu, setMenu] = useState(false);
 
     //Comment
@@ -37,7 +43,7 @@ export default function Header({ image, firstName, lastName, onImageClick }) {
                     />
                 </button>
             </div>
-            {menu && <MenusView />}
+            {menu && <MenusView userRequests={userRequests} />}
         </div>
     );
 }
