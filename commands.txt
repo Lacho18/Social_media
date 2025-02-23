@@ -1,4 +1,4 @@
 git add .
-git commit -m "Added function for sending friend request"
+git commit -m "Adding visual update when sending request"
 git branch -M main
 git push -u origin main

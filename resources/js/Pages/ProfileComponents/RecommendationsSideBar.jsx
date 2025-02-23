@@ -6,8 +6,11 @@ import axios from "axios";
 export default function RecommendationsSideBar({
     currentUserId,
     friendRequestHandler,
+    sendedRequests,
 }) {
     const [recommendedUsers, setRecommendedUsers] = useState([]);
+
+    console.log(sendedRequests);
 
     useEffect(() => {
         async function getRecommendations() {
@@ -42,6 +45,7 @@ export default function RecommendationsSideBar({
                             user={user}
                             addButton={true}
                             friendRequestHandler={friendRequestHandler}
+                            sendedRequests={sendedRequests}
                         />
                     ))}
                 </div>

@@ -8,8 +8,16 @@ import PostsView from "./ProfileComponents/PostsView";
 import RecommendationsSideBar from "./ProfileComponents/RecommendationsSideBar";
 import axios from "axios";
 
+/*
+    Friend requests raboti!
+    1. Napravi taka che vizualno da se promenq sled prashtane na pokana da ne moje da se prati pak
+    2. Dobavi prozorec kudeto da se vizualizirat requestovete, kato ako sa s vupros da moje da im se otgovarq
+*/
+
 export default function Profile() {
     const { user } = usePage().props;
+
+    console.log(user);
 
     const { data, setData, post, errors } = useForm({
         image: null,
@@ -21,7 +29,7 @@ export default function Profile() {
     const [userImage, setUserImage] = useState(user.imagePath);
 
     //A state to change the add button on recommendations to something else after ending request
-    const [sendedRequests, setSendedRequests] = useState(user.sendedRequests);
+    const [sendedRequests, setSendedRequests] = useState(user.sendedRequest);
 
     //Updates profile image
     function setNewImage() {
@@ -37,18 +45,14 @@ export default function Profile() {
 
     //Function that handles a friend request send
     async function friendRequestHandler(receiverId) {
-        console.log("Nigga 1");
-
         const response = await axios.post(`/findUsers/friendRequest`, {
             senderId: user.id,
             receiverId: receiverId,
         });
 
-        console.log("Nigga 2");
-
         if (response.status === 200) {
             setSendedRequests((oldValue) => {
-                const newValue = response.data.user.sendedRequests;
+                const newValue = response.data.user.sendedRequest;
 
                 return newValue;
             });
@@ -80,6 +84,7 @@ export default function Profile() {
                 <RecommendationsSideBar
                     currentUserId={user.id}
                     friendRequestHandler={friendRequestHandler}
+                    sendedRequests={sendedRequests}
                 />
             </div>
             {changeProfileImage && (

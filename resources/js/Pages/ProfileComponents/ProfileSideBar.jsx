@@ -2,8 +2,9 @@ export default function ProfileSideBar({
     user,
     addButton,
     friendRequestHandler,
+    sendedRequests,
 }) {
-    console.log(user.image);
+    console.log(sendedRequests);
     return (
         <div
             className="flex justify-between p-2 border-4 border-blue-700 rounded-3xl m-3"
@@ -24,14 +25,19 @@ export default function ProfileSideBar({
                 </div>
             </div>
             <div className="flex items-center">
-                {addButton && (
-                    <button
-                        className="bg-blue-950 p-2 rounded-xl border-2 border-blue-800"
-                        onClick={() => friendRequestHandler(user.id)}
-                    >
-                        Add friend
-                    </button>
-                )}
+                {addButton &&
+                    (!sendedRequests.includes(user.id) ? (
+                        <button
+                            className="bg-blue-950 p-2 rounded-xl border-2 border-blue-800"
+                            onClick={() => friendRequestHandler(user.id)}
+                        >
+                            Add friend
+                        </button>
+                    ) : (
+                        <div className="w-10 h-10 rounded-full p-1 bg-green-500 text-center mr-5">
+                            ✔️
+                        </div>
+                    ))}
             </div>
         </div>
     );
