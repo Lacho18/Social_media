@@ -121,8 +121,36 @@ class GetUsersController extends Controller
     }
 
     public function deniedRequest(Request $request) {
-        //dd($request->all());
+        $sender = User::find($request->senderId);
+        $receiver = User::find($request->receiverId);
 
-        return response()->json(['message' => "Are ve ey. SenderID = " . $request->senderId . " | ReceiverId = " . $request->receiverId]);
+        //Removes receiver id from sendedRequest array of the sender
+        $sendedRequest = $sender->sendedRequest;
+        if(in_array($request->receiverId, $sendedRequest)) {
+            $sendedRequest = array_values(array_filter($sendedRequest, function($element) use ($request) {
+                return $element != $request->receiverId;
+            }));
+        }
+        $sender->sendedRequest = $sendedRequest;
+
+        //Add the receiver id to rejectedRequests field of the sender
+        $rejectedRequests = $sender->rejectedRequests;
+        if(!in_array($request->receiverId, $rejectedRequests)) {
+            array_push($rejectedRequests, $request->receiverId);
+        }
+        $sender->rejectedRequests = $rejectedRequests;
+
+        //Removing the friend request from requests array of the receiver
+        $receiverRequests = $receiver->requests;
+        $receiverRequests = array_values(array_filter($receiverRequests, function($element) use ($request) {
+            return $element["senderId"] != $request->senderId;
+        }));
+        $receiver->requests = $receiverRequests; 
+
+        //Applying the changes to the database
+        //$sender->save();
+        //$receiver->save();
+
+        return response()->json(['message' => "Successful request", 'user' => $receiver, 'sender' => $sender]);
     }
 }

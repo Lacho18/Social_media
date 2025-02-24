@@ -28,12 +28,10 @@ export default function Profile() {
     const [changeProfileImage, setChangeProfileImage] = useState(false);
 
     //A state that visualize the updated profile image dynamically
-    const [userImage, setUserImage] = useState(globalUser.imagePath);
+    const [userImage, setUserImage] = useState(user.imagePath);
 
     //A state to change the add button on recommendations to something else after ending request
-    const [sendedRequests, setSendedRequests] = useState(
-        globalUser.sendedRequest
-    );
+    const [sendedRequests, setSendedRequests] = useState(user.sendedRequest);
 
     //Updates profile image
     function setNewImage() {
@@ -63,7 +61,7 @@ export default function Profile() {
         }
     }
 
-    if (!user) {
+    if (!user || !globalUser) {
         return (
             <Layout>
                 <p className="text-3xl text-red-500">
