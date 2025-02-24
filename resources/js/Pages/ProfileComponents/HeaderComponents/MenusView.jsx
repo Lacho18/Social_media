@@ -1,4 +1,4 @@
-import { useForm } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import { useState } from "react";
 import RequestsView from "./RequestsView";
 
@@ -34,7 +34,9 @@ export default function MenusView({ userRequests, userId }) {
                 )}
                 <p>Requests</p>
             </button>
-            <button className={buttonStyle}>Friends</button>
+            <button className={buttonStyle}>
+                <Link href="/friends">Friends</Link>
+            </button>
         </div>
     );
 }

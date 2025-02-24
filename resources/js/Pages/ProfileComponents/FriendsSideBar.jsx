@@ -13,8 +13,6 @@ export default function FriendsSideBar() {
                 `/findUsers/friends/${globalUser.id}`
             );
 
-            console.log(response.data);
-
             if (response.status === 200) {
                 setFriends(response.data.friendsData);
             }

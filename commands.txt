@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding function that returns data for every friend of a given user"
+git commit -m "Creating page for visualizing all friends of an user"
 git branch -M main
 git push -u origin main
