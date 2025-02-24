@@ -13,7 +13,7 @@ Route::inertia('/signup', 'SignUp');
 
 Route::inertia('/login', 'LogIn');
 
-Route::inertia('/profilePage/{userId}', 'LogIn');
+Route::inertia('/profilePage/{userId}', 'ProfilePage');
 
 Route::inertia('/friends', 'Friends');
 

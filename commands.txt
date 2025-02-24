@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding personal profile page"
+git commit -m "Final submit for date 24.02.2025"
 git branch -M main
 git push -u origin main
