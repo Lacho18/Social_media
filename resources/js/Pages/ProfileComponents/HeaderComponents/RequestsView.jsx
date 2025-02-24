@@ -16,7 +16,7 @@ export default function RequestsView({ userRequests, userId }) {
             receiverId: userId,
         });
 
-        console.log(response.data.message);
+        console.log(response.data.message[0]);
     }
 
     return (

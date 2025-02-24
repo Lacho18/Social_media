@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Inertia\Inertia;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class GetUsersController extends Controller
 {
@@ -78,9 +79,45 @@ class GetUsersController extends Controller
     }   
     
     public function acceptRequest(Request $request) {
-        //dd($request->all());
+        $sender = User::find($request->senderId);
+        $receiver = User::find($request->receiverId);
 
-        return response()->json(['message' => "Are ve ey"]);
+        //Removes the receiver id from sendedRequests array
+        $sendedRequest = $sender->sendedRequest;
+        if(in_array($request->receiverId, $sendedRequest)) {
+            $sendedRequest = array_values(array_filter($sendedRequest, function($element) use ($request) {
+                return $element != $request->receiverId;
+            }));
+            Log::debug(['data' => $sendedRequest]);
+        }
+        $sender->sendedRequest = $sendedRequest;
+
+        //Adding receiverId to friends array of the sender
+        $senderFriends = $sender->friends;
+        if(!in_array($request->receiverId, $senderFriends)) {
+            array_push($senderFriends, $request->receiverId);
+        }
+        $sender->friends = $senderFriends;
+
+        //Adding senderId to friends array of the receiver
+        $receiverFriends = $receiver->friends;
+        if(!in_array($request->senderId, $receiverFriends)) {
+            array_push($receiverFriends, $request->senderId);
+        }
+        $receiver->friends = $receiverFriends;
+
+        //Removing the friend request from requests array of the receiver
+        $receiverRequests = $receiver->requests;
+        $receiverRequests = array_values(array_filter($receiverRequests, function($element) use ($request) {
+            return $element["senderId"] != $request->senderId;
+        }));
+        $receiver->requests = $receiverRequests; 
+
+        //Applying the changes to the database
+        //$sender->save();
+        //$receiver->save();
+
+        return response()->json(['message' => "Successful request!", 'user' => $receiver]);
     }
 
     public function deniedRequest(Request $request) {
