@@ -3,15 +3,18 @@ import { useGlobalState } from "../../context/userContext";
 
 export default function RequestsView({ userRequests, userId }) {
     const { globalUser, setGlobalUser } = useGlobalState();
-    console.log(globalUser);
 
+    //Function that handles the acceptance of the friend request
     async function yesButtonHandler(senderId) {
         const response = await axios.post("/findUsers/acceptRequest", {
             senderId: senderId,
             receiverId: userId,
         });
 
-        console.log(response.data.message);
+        if (response.status === 200) {
+            console.log(response.data.message);
+            setGlobalUser(response.data.user);
+        }
     }
 
     async function noButtonHandler(senderId) {

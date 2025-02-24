@@ -1,4 +1,4 @@
 git add .
-git commit -m "Creating global state variable for the user"
+git commit -m "Adding global state variable for the user"
 git branch -M main
 git push -u origin main

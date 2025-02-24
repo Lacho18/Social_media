@@ -14,7 +14,9 @@ export default function Profile() {
     const { globalUser, setGlobalUser } = useGlobalState();
 
     useEffect(() => {
-        setGlobalUser(user);
+        if (user) {
+            setGlobalUser(user);
+        }
     }, []);
 
     console.log(user);
@@ -26,10 +28,12 @@ export default function Profile() {
     const [changeProfileImage, setChangeProfileImage] = useState(false);
 
     //A state that visualize the updated profile image dynamically
-    const [userImage, setUserImage] = useState(user.imagePath);
+    const [userImage, setUserImage] = useState(globalUser.imagePath);
 
     //A state to change the add button on recommendations to something else after ending request
-    const [sendedRequests, setSendedRequests] = useState(user.sendedRequest);
+    const [sendedRequests, setSendedRequests] = useState(
+        globalUser.sendedRequest
+    );
 
     //Updates profile image
     function setNewImage() {
@@ -73,18 +77,18 @@ export default function Profile() {
     return (
         <div className="bg-gradient-to-r from-gray-900 via-blue-950 to-black min-h-screen w-screen flex flex-col">
             <Header
-                userId={user.id}
+                userId={globalUser.id}
                 image={userImage}
-                firstName={user.firstName}
-                lastName={user.lastName}
-                userRequests={user.requests}
+                firstName={globalUser.firstName}
+                lastName={globalUser.lastName}
+                userRequests={globalUser.requests}
                 onImageClick={() => setChangeProfileImage(true)}
             />
             <div className="h-[calc(100vh-70px)] flex text-white">
                 <FriendsSideBar />
                 <PostsView />
                 <RecommendationsSideBar
-                    currentUserId={user.id}
+                    currentUserId={globalUser.id}
                     friendRequestHandler={friendRequestHandler}
                     sendedRequests={sendedRequests}
                 />
