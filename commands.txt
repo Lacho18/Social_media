@@ -1,4 +1,4 @@
 git add .
-git commit -m "Creating page for visualizing all friends of an user"
+git commit -m "Adding personal profile page"
 git branch -M main
 git push -u origin main

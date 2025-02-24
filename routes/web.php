@@ -13,6 +13,8 @@ Route::inertia('/signup', 'SignUp');
 
 Route::inertia('/login', 'LogIn');
 
+Route::inertia('/profilePage/{userId}', 'LogIn');
+
 Route::inertia('/friends', 'Friends');
 
 Route::get('/profile', function () {

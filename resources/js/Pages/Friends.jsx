@@ -22,6 +22,14 @@ export default function Friends() {
         getFriends();
     }, []);
 
+    if (!globalUser) {
+        return (
+            <Layout>
+                <p>No user found</p>
+            </Layout>
+        );
+    }
+
     return (
         <div class="bg-gradient-to-r from-gray-900 via-blue-950 to-black min-h-screen w-screen flex flex-col">
             <Header
@@ -36,13 +44,15 @@ export default function Friends() {
                 <p className="text-3xl m-2 text-white font-bold">
                     Friends list
                 </p>
-                {friends.length > 0 ? (
-                    friends.map((friend) => (
-                        <ProfileSideBar user={friend} addButton={false} />
-                    ))
-                ) : (
-                    <p>No friends found!</p>
-                )}
+                <div className="h-auto text-white">
+                    {friends.length > 0 ? (
+                        friends.map((friend) => (
+                            <ProfileSideBar user={friend} addButton={false} />
+                        ))
+                    ) : (
+                        <p>No friends found!</p>
+                    )}
+                </div>
             </div>
         </div>
     );

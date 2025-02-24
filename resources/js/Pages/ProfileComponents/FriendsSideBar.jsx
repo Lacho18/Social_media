@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useGlobalState } from "../context/userContext";
 import ProfileSideBar from "./ProfileSideBar";
 import axios from "axios";
+import { Link } from "@inertiajs/react";
 
 export default function FriendsSideBar() {
     const { globalUser, setGlobalUser } = useGlobalState();
@@ -38,9 +39,12 @@ export default function FriendsSideBar() {
                     )}
                 </div>
                 <div className="flex justify-center">
-                    <button className="italic underline text-gray-500">
+                    <Link
+                        href="/friends"
+                        className="italic underline text-gray-500"
+                    >
                         View more
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>
