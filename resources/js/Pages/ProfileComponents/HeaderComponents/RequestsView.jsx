@@ -1,6 +1,10 @@
 import axios from "axios";
+import { useGlobalState } from "../../context/userContext";
 
 export default function RequestsView({ userRequests, userId }) {
+    const { globalUser, setGlobalUser } = useGlobalState();
+    console.log(globalUser);
+
     async function yesButtonHandler(senderId) {
         const response = await axios.post("/findUsers/acceptRequest", {
             senderId: senderId,

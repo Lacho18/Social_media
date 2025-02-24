@@ -1,4 +1,4 @@
 git add .
-git commit -m "Creating accept friend request functionality"
+git commit -m "Creating global state variable for the user"
 git branch -M main
 git push -u origin main

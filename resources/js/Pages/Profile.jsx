@@ -1,21 +1,21 @@
 import { useForm, usePage } from "@inertiajs/react";
 import Layout from "./Layout";
 import Header from "./ProfileComponents/HeaderComponents/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AskWindow from "./ProfileComponents/AskWindow";
 import FriendsSideBar from "./ProfileComponents/FriendsSideBar";
 import PostsView from "./ProfileComponents/PostsView";
 import RecommendationsSideBar from "./ProfileComponents/RecommendationsSideBar";
 import axios from "axios";
-
-/*
-    Friend requests raboti!
-    1. Napravi taka che vizualno da se promenq sled prashtane na pokana da ne moje da se prati pak
-    2. Dobavi prozorec kudeto da se vizualizirat requestovete, kato ako sa s vupros da moje da im se otgovarq
-*/
+import { useGlobalState } from "./context/userContext";
 
 export default function Profile() {
     const { user } = usePage().props;
+    const { globalUser, setGlobalUser } = useGlobalState();
+
+    useEffect(() => {
+        setGlobalUser(user);
+    }, []);
 
     console.log(user);
 
