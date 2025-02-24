@@ -4,28 +4,18 @@ import { useGlobalState } from "../../context/userContext";
 export default function RequestsView({ userRequests, userId }) {
     const { globalUser, setGlobalUser } = useGlobalState();
 
-    //Function that handles the acceptance of the friend request
+    //Function that handles the acceptance and deny of the friend request
+    async function yesNoButtonHandler(senderId, yesClicked) {
+        const method = yesClicked ? "acceptRequest" : "deniedRequest";
 
-    async function yesButtonHandler(senderId) {
-        const response = await axios.post("/findUsers/acceptRequest", {
+        const response = await axios.post("/findUsers/" + method, {
             senderId: senderId,
             receiverId: userId,
         });
 
         if (response.status === 200) {
-            console.log(response.data.message);
-            setGlobalUser(response.data.user);
-        }
-    }
-
-    async function noButtonHandler(senderId) {
-        const response = await axios.post("/findUsers/deniedRequest", {
-            senderId: senderId,
-            receiverId: userId,
-        });
-
-        if (response.status === 200) {
-            console.log(response.data.message);
+            console.log(response.data.user);
+            console.log(response.data.sender);
             setGlobalUser(response.data.user);
         }
     }
@@ -54,8 +44,9 @@ export default function RequestsView({ userRequests, userId }) {
                                         <button
                                             className="p-1 mr-4 bg-green-500"
                                             onClick={() =>
-                                                yesButtonHandler(
-                                                    request.senderId
+                                                yesNoButtonHandler(
+                                                    request.senderId,
+                                                    true
                                                 )
                                             }
                                         >
@@ -64,8 +55,9 @@ export default function RequestsView({ userRequests, userId }) {
                                         <button
                                             className="p-1 mr-4 bg-red-500"
                                             onClick={() =>
-                                                noButtonHandler(
-                                                    request.senderId
+                                                yesNoButtonHandler(
+                                                    request.senderId,
+                                                    false
                                                 )
                                             }
                                         >

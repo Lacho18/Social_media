@@ -1,4 +1,4 @@
 git add .
-git commit -m "Creating rejection of friend request functionality"
+git commit -m "Simplifying the yes no function handler"
 git branch -M main
 git push -u origin main

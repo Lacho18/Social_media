@@ -117,7 +117,7 @@ class GetUsersController extends Controller
         //$sender->save();
         //$receiver->save();
 
-        return response()->json(['message' => "Successful request!", 'user' => $receiver]);
+        return response()->json(['message' => "Successful request!", 'user' => $receiver, 'sender' => $sender]);
     }
 
     public function deniedRequest(Request $request) {
