@@ -14,8 +14,6 @@ export default function RequestsView({ userRequests, userId }) {
         });
 
         if (response.status === 200) {
-            console.log(response.data.user);
-            console.log(response.data.sender);
             setGlobalUser(response.data.user);
         }
     }

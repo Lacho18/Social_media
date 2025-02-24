@@ -7,6 +7,9 @@ export default function MenusView({ userRequests, userId }) {
 
     const [requestsView, setRequestsView] = useState(false);
 
+    const buttonStyle =
+        "p-1 text-white text-xl m-2 border-2 border-white rounded-xl";
+
     function logoutHandler() {
         post("/logout");
     }
@@ -16,15 +19,12 @@ export default function MenusView({ userRequests, userId }) {
     }
 
     return (
-        <div className="absolute w-1/5 bg-blue-950 mt-20 left-3/4 overflow-hidden flex flex-col">
-            <button
-                className="p-1 text-white text-xl m-2 border-2 border-white rounded-xl"
-                onClick={logoutHandler}
-            >
+        <div className="absolute w-1/5 bg-blue-950 mt-20 left-3/4 top-1.5 overflow-hidden flex flex-col">
+            <button className={buttonStyle} onClick={logoutHandler}>
                 Log out
             </button>
             <button
-                className="p-1 text-white text-xl m-2 border-2 border-white rounded-xl"
+                className={buttonStyle}
                 onClick={() => setRequestsView(true)}
             >
                 {userRequests.length > 0 && (
@@ -34,6 +34,7 @@ export default function MenusView({ userRequests, userId }) {
                 )}
                 <p>Requests</p>
             </button>
+            <button className={buttonStyle}>Friends</button>
         </div>
     );
 }

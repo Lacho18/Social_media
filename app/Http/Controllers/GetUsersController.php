@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 class GetUsersController extends Controller
 {
+    //Get recommendations for the user
     public function getRecommendations(Request $request, $currentUserID) {
         try {
             $currentUser = User::find($currentUserID);
@@ -30,6 +31,16 @@ class GetUsersController extends Controller
         catch(Exception $e) {
             return response()->json(['message' => "I don't know"]);
         }
+    }
+
+    //Get necessary visual data for the friends of the given user
+    public function getFriends(Request $request, $currentUserID) {
+        $currentUser = User::find($currentUserID);
+        $friends = $currentUser->friends;
+
+        $friendsData = User::select("id", "firstName", "lastName", "imagePath")->whereIn('id', $friends)->get();
+
+        return response()->json(['message' => "Successful request!", "friendsData" => $friendsData]);
     }
 
     //Creates friend request and add it to the receiver requests field
@@ -114,10 +125,10 @@ class GetUsersController extends Controller
         $receiver->requests = $receiverRequests; 
 
         //Applying the changes to the database
-        //$sender->save();
-        //$receiver->save();
+        $sender->save();
+        $receiver->save();
 
-        return response()->json(['message' => "Successful request!", 'user' => $receiver, 'sender' => $sender]);
+        return response()->json(['message' => "Successful request!", 'user' => $receiver]);
     }
 
     public function deniedRequest(Request $request) {
@@ -148,9 +159,9 @@ class GetUsersController extends Controller
         $receiver->requests = $receiverRequests; 
 
         //Applying the changes to the database
-        //$sender->save();
-        //$receiver->save();
+        $sender->save();
+        $receiver->save();
 
-        return response()->json(['message' => "Successful request", 'user' => $receiver, 'sender' => $sender]);
+        return response()->json(['message' => "Successful request", 'user' => $receiver]);
     }
 }

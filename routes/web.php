@@ -29,6 +29,7 @@ Route::post('/logout', [UserController::class, 'logout']);
 
 Route::prefix('findUsers')->group(function () {
     Route::get('/recommendations/{currentUserID}', [GetUsersController::class, 'getRecommendations']);
+    Route::get('/friends/{currentUserID}', [GetUsersController::class, 'getFriends']);
     Route::post('/friendRequest', [GetUsersController::class, 'friendRequest']);
     Route::post('/acceptRequest', [GetUsersController::class, 'acceptRequest']);
     Route::post('/deniedRequest', [GetUsersController::class, 'deniedRequest']);

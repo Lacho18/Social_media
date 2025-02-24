@@ -1,4 +1,4 @@
 git add .
-git commit -m "Simplifying the yes no function handler"
+git commit -m "Adding function that returns data for every friend of a given user"
 git branch -M main
 git push -u origin main
