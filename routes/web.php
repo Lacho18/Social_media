@@ -17,7 +17,7 @@ Route::get('/profilePage/{userId}', function ($userId) {
     return Inertia::render('ProfilePage', [
         'userId' => $userId
     ]);
-});
+});      
 
 Route::inertia('/friends', 'Friends');
 

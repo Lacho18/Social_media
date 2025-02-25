@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding new page for creating a post"
+git commit -m "Final submit 25.02.2025"
 git branch -M main
 git push -u origin main
