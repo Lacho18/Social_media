@@ -9,8 +9,6 @@ export default function ProfilePage() {
     const [user, setUser] = useState(null);
     const areFriends = useRef(false);
 
-    console.log(globalUser);
-
     useEffect(() => {
         async function getUser() {
             const response = await axios.get("/findUsers/getUser/" + userId);

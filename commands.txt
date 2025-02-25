@@ -1,4 +1,4 @@
 git add .
-git commit -m "Fixed logic on ProfilePage"
+git commit -m "Creating table for posts"
 git branch -M main
 git push -u origin main
