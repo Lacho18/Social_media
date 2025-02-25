@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Log;
 
 class GetUsersController extends Controller
 {
+    //Gets the user by given id. This data is used to visualize data on personalPage of the user
+    public function getUser(Request $request, $userID) {
+        $user = User::select('id', 'firstName', 'lastName', 'dateOfBirth', 'friends', 'imagePath', 'created_at')->where('id', $userID);
+
+        return response()->json(['message' => "Successful request", 'user' => $user]);
+    }
+
     //Get recommendations for the user
     public function getRecommendations(Request $request, $currentUserID) {
         try {
