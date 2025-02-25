@@ -15,6 +15,7 @@ export default function ProfilePage() {
     const [user, setUser] = useState(null);
     const areFriends = useRef(false);
 
+    console.log(user);
     console.log(areFriends);
 
     useEffect(() => {
@@ -32,6 +33,18 @@ export default function ProfilePage() {
         getUser();
     }, []);
 
+    async function friendRequestHandler(receiverId) {
+        const response = await axios.post(`/findUsers/friendRequest`, {
+            senderId: globalUser.id,
+            receiverId: receiverId,
+        });
+
+        if (response.status === 200) {
+            console.log(response.data.message);
+            setGlobalUser(response.data.user);
+        }
+    }
+
     if (!user) {
         return (
             <div className="bg-gradient-to-r from-gray-900 via-blue-950 to-black min-h-screen w-screen flex justify-center items-center text-white">
@@ -47,29 +60,55 @@ export default function ProfilePage() {
                     <div className="w-1/3 flex justify-center items-center">
                         <img
                             className="w-40 h-40 rounded-full"
-                            src={user.imagePath}
+                            src={
+                                user.imagePath !== "null"
+                                    ? user.imagePath
+                                    : "https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
+                            }
                         />
                     </div>
-                    <div className="w-2/3 mt-2">
+                    <div className="w-2/3 mt-2 flex flex-col gap-4">
                         <div className="flex items-center gap-4">
                             <p className="text-xl font-bold">
                                 {user.firstName} {user.lastName}
                             </p>
                             {areFriends.current ? (
                                 <p className="p-2 border-2 border-black rounded bg-gray-800">
-                                    friends ✔️
+                                    Friends ✔️
+                                </p>
+                            ) : globalUser.sendedRequest.includes(user.id) ? (
+                                <p className="p-2 bg-green-500 border-2 border-green-900 rounded">
+                                    Sended request
                                 </p>
                             ) : (
-                                <button className="p-2 bg-blue-500 rounded">
+                                <button
+                                    className="p-2 bg-blue-500 rounded"
+                                    onClick={() =>
+                                        friendRequestHandler(user.id)
+                                    }
+                                >
                                     Add friend
                                 </button>
                             )}
                         </div>
-                        <div className="flex">
-                            <div></div>
-                            <div></div>
+                        <div className="flex gap-3">
+                            <div className="p-3 flex flex-col justify-center items-center border-2 border-gray-900 bg-gray-800 rounded-lg">
+                                <p className="font-bold text-2xl">
+                                    {user.posts.length}
+                                </p>
+                                <p>Posts</p>
+                            </div>
+                            <div className="p-3 flex flex-col justify-center items-center border-2 border-gray-900 bg-gray-800 rounded-lg">
+                                <p className="font-bold text-2xl">
+                                    {user.friends.length}
+                                </p>
+                                <p>Friends</p>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div className="border-t-2 border-gray-700 rounded-xl m-4 p-2">
+                    <p>Hello</p>
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@ class GetUsersController extends Controller
 {
     //Gets the user by given id. This data is used to visualize data on personalPage of the user
     public function getUser(Request $request, $userID) {
-        $user = User::select('id', 'firstName', 'lastName', 'dateOfBirth', 'friends', 'imagePath', 'created_at')->where('id', $userID)->first();
+        $user = User::select('id', 'firstName', 'lastName', 'dateOfBirth', 'friends', 'posts', 'imagePath', 'created_at')->where('id', $userID)->first();
 
         return response()->json(['message' => "Successful request", 'user' => $user]);
     }

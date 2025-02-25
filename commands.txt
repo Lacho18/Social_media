@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding new column to the users table and styling to the personal page"
+git commit -m "Finalizing Profile page for now"
 git branch -M main
 git push -u origin main
