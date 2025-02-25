@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding get user route"
+git commit -m "Adding routes path to every recommendation and friend box"
 git branch -M main
 git push -u origin main
