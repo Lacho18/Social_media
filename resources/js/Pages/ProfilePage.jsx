@@ -4,19 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { useGlobalState } from "./context/userContext";
 
 export default function ProfilePage() {
-    /*
-        1. Vish kak da vzemesh parametura ot route
-        2. Napravi personalnite stranici
-        3. Napravi vruzki kum personalnite stranici kudeto trqbva
-    */
-
     const { userId } = usePage().props;
     const { globalUser, setGlobalUser } = useGlobalState();
     const [user, setUser] = useState(null);
     const areFriends = useRef(false);
-
-    console.log(user);
-    console.log(areFriends);
 
     useEffect(() => {
         async function getUser() {

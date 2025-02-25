@@ -1,4 +1,4 @@
 git add .
-git commit -m "Added utils to the Date class"
+git commit -m "Added comments to utils to the Date class"
 git branch -M main
 git push -u origin main
