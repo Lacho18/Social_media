@@ -43,6 +43,7 @@ class User extends Authenticatable
         'personalPosts' => 'array',
         'rejectedRequests' => 'array',
         'requests' => 'array',
+        'posts' => 'array',
     ];
 
     /**

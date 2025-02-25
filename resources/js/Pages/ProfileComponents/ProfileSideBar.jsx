@@ -12,7 +12,7 @@ export default function ProfileSideBar({
             style={{ borderColor: "#2d2a5c" }}
         >
             <Link
-                href={`/profilePage/${1}`}
+                href={`/profilePage/${user.id}`}
                 className="flex justify-between w-full"
             >
                 <div className="flex gap-3 items-center">

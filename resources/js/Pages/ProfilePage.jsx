@@ -15,7 +15,7 @@ export default function ProfilePage() {
     const [user, setUser] = useState(null);
     const areFriends = useRef(false);
 
-    console.log(user);
+    console.log(areFriends);
 
     useEffect(() => {
         async function getUser() {
@@ -44,11 +44,31 @@ export default function ProfilePage() {
         <div className="bg-gradient-to-r from-gray-900 via-blue-950 to-black min-h-screen w-screen flex justify-center text-white">
             <div className="w-9/12 border-l-4 border-r-4 border-blue-950 rounded-xl">
                 <div className="w-full h-64 flex">
-                    <div className="w-1/3">
-                        <img src={user.imagePath} />
+                    <div className="w-1/3 flex justify-center items-center">
+                        <img
+                            className="w-40 h-40 rounded-full"
+                            src={user.imagePath}
+                        />
                     </div>
-                    <div className="w-2/3 bg-green-500">
-                        <p>Pytki</p>
+                    <div className="w-2/3 mt-2">
+                        <div className="flex items-center gap-4">
+                            <p className="text-xl font-bold">
+                                {user.firstName} {user.lastName}
+                            </p>
+                            {areFriends.current ? (
+                                <p className="p-2 border-2 border-black rounded bg-gray-800">
+                                    friends ✔️
+                                </p>
+                            ) : (
+                                <button className="p-2 bg-blue-500 rounded">
+                                    Add friend
+                                </button>
+                            )}
+                        </div>
+                        <div className="flex">
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div>
                 </div>
             </div>

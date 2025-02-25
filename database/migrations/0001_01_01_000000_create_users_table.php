@@ -26,6 +26,7 @@ return new class extends Migration
             $table->json('requests')->default(json_encode([]));
             $table->json('sendedRequest')->default(json_encode([]));
             $table->json('rejectedRequests')->default(json_encode([]));
+            $table->json('posts')->default(json_encode([]));
             $table->string('imagePath');
             $table->rememberToken();
             $table->timestamps();
