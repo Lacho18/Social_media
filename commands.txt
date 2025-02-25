@@ -1,4 +1,4 @@
 git add .
-git commit -m "Creating table for posts"
+git commit -m "Updating menu"
 git branch -M main
 git push -u origin main

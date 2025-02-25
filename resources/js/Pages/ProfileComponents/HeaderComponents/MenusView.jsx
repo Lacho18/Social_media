@@ -26,6 +26,9 @@ export default function MenusView({ userRequests, userId }) {
             <button className={buttonStyle}>
                 <Link href={"/profilePage/" + userId}>Profile</Link>
             </button>
+            <button className={buttonStyle}>
+                <Link href="/newPost">Create post</Link>
+            </button>
             <button
                 className={buttonStyle}
                 onClick={() => setRequestsView(true)}

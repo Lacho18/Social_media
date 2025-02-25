@@ -21,6 +21,8 @@ Route::get('/profilePage/{userId}', function ($userId) {
 
 Route::inertia('/friends', 'Friends');
 
+Route::inertia('/newPost', 'CreatePost');
+
 Route::get('/profile', function () {
     return Inertia::render('Profile', [
         'user' => Auth::user()
