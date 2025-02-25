@@ -9,9 +9,10 @@ export default function ProfilePage() {
     const [user, setUser] = useState(null);
     const areFriends = useRef(false);
 
+    console.log(globalUser);
+
     useEffect(() => {
         async function getUser() {
-            console.log("/findUsers/getUser/" + userId);
             const response = await axios.get("/findUsers/getUser/" + userId);
 
             if (response.status === 200) {
@@ -31,7 +32,17 @@ export default function ProfilePage() {
             }
         }
 
-        getUser();
+        if (globalUser.id !== userId) {
+            getUser();
+        } else {
+            setUser(() => {
+                let userData = globalUser;
+                userData.dateOfBirth = new Date(globalUser.dateOfBirth);
+                userData.created_at = new Date(globalUser.created_at);
+
+                return userData;
+            });
+        }
     }, []);
 
     async function friendRequestHandler(receiverId) {
@@ -73,23 +84,29 @@ export default function ProfilePage() {
                             <p className="text-xl font-bold">
                                 {user.firstName} {user.lastName}
                             </p>
-                            {areFriends.current ? (
-                                <p className="p-2 border-2 border-black rounded bg-gray-800">
-                                    Friends ✔️
-                                </p>
-                            ) : globalUser.sendedRequest.includes(user.id) ? (
-                                <p className="p-2 bg-green-500 border-2 border-green-900 rounded">
-                                    Sended request
-                                </p>
+                            {globalUser.id !== user.id ? (
+                                areFriends.current ? (
+                                    <p className="p-2 border-2 border-black rounded bg-gray-800">
+                                        Friends ✔️
+                                    </p>
+                                ) : globalUser.sendedRequest.includes(
+                                      user.id
+                                  ) ? (
+                                    <p className="p-2 bg-green-500 border-2 border-green-900 rounded">
+                                        Sended request
+                                    </p>
+                                ) : (
+                                    <button
+                                        className="p-2 bg-blue-500 rounded"
+                                        onClick={() =>
+                                            friendRequestHandler(user.id)
+                                        }
+                                    >
+                                        Add friend
+                                    </button>
+                                )
                             ) : (
-                                <button
-                                    className="p-2 bg-blue-500 rounded"
-                                    onClick={() =>
-                                        friendRequestHandler(user.id)
-                                    }
-                                >
-                                    Add friend
-                                </button>
+                                <div></div>
                             )}
                         </div>
                         <div className="flex gap-3">

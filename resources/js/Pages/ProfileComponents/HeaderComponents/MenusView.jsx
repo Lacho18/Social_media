@@ -23,6 +23,9 @@ export default function MenusView({ userRequests, userId }) {
             <button className={buttonStyle} onClick={logoutHandler}>
                 Log out
             </button>
+            <button className={buttonStyle}>
+                <Link href={"/profilePage/" + userId}>Profile</Link>
+            </button>
             <button
                 className={buttonStyle}
                 onClick={() => setRequestsView(true)}
