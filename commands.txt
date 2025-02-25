@@ -1,4 +1,4 @@
 git add .
-git commit -m "Finalizing Profile page for now"
+git commit -m "Added utils to the Date class"
 git branch -M main
 git push -u origin main

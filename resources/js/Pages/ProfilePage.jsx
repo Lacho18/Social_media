@@ -25,7 +25,17 @@ export default function ProfilePage() {
 
             if (response.status === 200) {
                 console.log(response.data);
-                setUser(response.data.user);
+                setUser(() => {
+                    let userData = response.data.user;
+                    userData.dateOfBirth = new Date(
+                        response.data.user.dateOfBirth
+                    );
+                    userData.created_at = new Date(
+                        response.data.user.created_at
+                    );
+
+                    return userData;
+                });
                 areFriends.current = globalUser.friends.includes(userId);
             }
         }
@@ -104,6 +114,14 @@ export default function ProfilePage() {
                                 </p>
                                 <p>Friends</p>
                             </div>
+                        </div>
+                        <div>
+                            <p>{user.dateOfBirth.calculateAge()} years old</p>
+                            <p>Birthday: {user.dateOfBirth.formatDate()}</p>
+                            <p>
+                                Account since:{" "}
+                                {user.created_at.calculateTimeDistance()}
+                            </p>
                         </div>
                     </div>
                 </div>
