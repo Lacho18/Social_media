@@ -5,11 +5,6 @@ import axios from "axios";
 import { useForm } from "@inertiajs/react";
 
 export default function CreatePost() {
-    /*
-        1. Napravi komponenta za suzdavane na post
-        2. Suzday routes za vsichki CRUD operacii s postove
-        3. Suzday controleri za CRUD operaciite s postove 
-    */
     const { globalUser, setGlobalUser } = useGlobalState();
 
     const { data, setData, post } = useForm({
@@ -17,7 +12,6 @@ export default function CreatePost() {
     });
 
     const [newPost, setPost] = useState({});
-    const [images, setImages] = useState([]);
     const [visualImages, setVisualImages] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -48,65 +42,6 @@ export default function CreatePost() {
     }
 
     async function postCreationHandler() {
-        /*const formData = new FormData();
-        formData.append("name", post.name);
-        formData.append("description", post.description);
-        formData.append("posterId", globalUser.id);
-
-        // Append each file from the `post.images` array
-        post.images.forEach((image, index) => {
-            formData.append(`images[]`, image); // `images[]` ensures Laravel treats it as an array
-        });
-
-        console.log(formData);
-
-        const response = await axios.post("/posts", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        });*/
-
-        /*let imagesUrls = [];
-
-        imagesUrls = await Promise.all(
-            newPost.images.map(async (image) => {
-                const formData = createFormData(
-                    globalUser.firstName + "_" + globalUser.lastName,
-                    globalUser.posts.length,
-                    image
-                );
-                try {
-                    const response = await axios.post(
-                        "/uploadImage/" + globalUser.id,
-                        {
-                            image: image,
-                        }
-                    );
-
-                    if (response.status === 200) {
-                        console.log(response.data.imageUrl);
-                        return response.data.imageUrl;
-                    } else {
-                        return "";
-                    }
-                } catch (e) {
-                    console.log("TYKAAAAAAAAAAAAAAAA");
-                    console.log(e.message);
-                }
-            })
-        );*/
-
-        //console.log(imagesUrls);
-
-        /*let imageUrls = [];
-        post("/uploadImage/" + globalUser.id, {
-            onSuccess: ({ props }) => {
-                imageUrls = props.urls;
-            },
-        });*/
-
-        //const imageUrls = await uploadImage();
-
         //Sending the array of image files to the backend, uploading them on the public disk and after that with the data for the urls store the post on the database
         post("/uploadImage/" + globalUser.id, {
             preserveState: true,
@@ -126,33 +61,7 @@ export default function CreatePost() {
                 }
             },
         });
-
-        /*try {
-            const response = await axios.post("/posts", {
-                name: newPost.name,
-                description: newPost.description,
-                images: imageUrls,
-                posterId: globalUser.id,
-            });
-
-            if (response.status === 200) {
-                console.log(response.data.message);
-            }
-        } catch (error) {
-            console.error("Error creating post:", error);
-        }*/
     }
-
-    const uploadImage = async () => {
-        try {
-            const response = await post("/uploadImage/" + globalUser.id);
-            console.log(response);
-            return response.props.imageUrls;
-        } catch (error) {
-            console.error("Error uploading image:", error);
-            return [];
-        }
-    };
 
     return (
         <div className="bg-gradient-to-r from-gray-900 via-blue-950 to-black min-h-screen w-screen flex justify-center text-white">
