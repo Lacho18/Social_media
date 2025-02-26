@@ -107,6 +107,7 @@ export default function CreatePost() {
 
         //const imageUrls = await uploadImage();
 
+        //Sending the array of image files to the backend, uploading them on the public disk and after that with the data for the urls store the post on the database
         post("/uploadImage/" + globalUser.id, {
             preserveState: true,
             preserveScroll: true,

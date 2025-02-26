@@ -1,4 +1,4 @@
 git add .
-git commit -m "Creating functionality to upload multiple images and store the data for the new post"
+git commit -m "Adding comments to the new code"
 git branch -M main
 git push -u origin main
