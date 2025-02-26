@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ImagesCollection from "./ProfileComponents/ImagesCollection";
+import axios from "axios";
 
 export default function CreatePost() {
     /*
@@ -31,6 +32,12 @@ export default function CreatePost() {
         });
 
         setSelectedImage(URL.createObjectURL(file));
+    }
+
+    async function postCreationHandler() {
+        const response = await axios.post("/posts", {
+            message: "Hello my friend",
+        });
     }
 
     return (
@@ -77,24 +84,12 @@ export default function CreatePost() {
                                 setSelectedImage(selImage)
                             }
                         />
-                        {/*<div className="w-1/3 p-3 flex flex-wrap">
-                            {visualImages.map((image) => (
-                                <button
-                                    className="ml-1 mr-1 mb-2"
-                                    style={{
-                                        border:
-                                            image === selectedImage
-                                                ? "3px solid #151526"
-                                                : "3px solid #50506b",
-                                        width: "78px",
-                                        height: "78px",
-                                    }}
-                                    onClick={() => setSelectedImage(image)}
-                                >
-                                    <img src={image} />
-                                </button>
-                            ))}
-                        </div>*/}
+                    </div>
+                    {/*Adding video component here*/}
+                    <div className="flex justify-center">
+                        <button className="p-2 text-xl font-bold border-2 border-gray-800 bg-gray-600 rounded-2xl">
+                            Create new post
+                        </button>
                     </div>
                 </div>
             </div>

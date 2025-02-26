@@ -1,4 +1,4 @@
 git add .
-git commit -m "Removing dummy data from ImagesCollection.jsx"
+git commit -m "Adding routes and controller for posts operations"
 git branch -M main
 git push -u origin main

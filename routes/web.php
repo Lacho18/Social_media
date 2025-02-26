@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GetUsersController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -45,5 +46,7 @@ Route::prefix('findUsers')->group(function () {
     Route::post('/acceptRequest', [GetUsersController::class, 'acceptRequest']);
     Route::post('/deniedRequest', [GetUsersController::class, 'deniedRequest']);
 });
+
+Route::resource('posts', PostController::class);
 
 Route::inertia('/*', 'NotFound');
