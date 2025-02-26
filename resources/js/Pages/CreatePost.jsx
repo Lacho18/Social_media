@@ -44,8 +44,6 @@ export default function CreatePost() {
     async function postCreationHandler() {
         //Sending the array of image files to the backend, uploading them on the public disk and after that with the data for the urls store the post on the database
         post("/uploadImage/" + globalUser.id, {
-            preserveState: true,
-            preserveScroll: true,
             only: ["images"],
             onSuccess: async ({ props }) => {
                 console.log(props);
@@ -55,10 +53,6 @@ export default function CreatePost() {
                     images: props.images,
                     posterId: globalUser.id,
                 });
-
-                if (response.status === 200) {
-                    console.log(response.data.message);
-                }
             },
         });
     }

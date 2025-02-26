@@ -1,4 +1,4 @@
 git add .
-git commit -m "Simplifying the code"
+git commit -m "Finalizing create post functionality"
 git branch -M main
 git push -u origin main

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Inertia\Inertia;
 
 use App\Models\User;
 use App\Models\Post;
@@ -31,27 +32,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        /*Log::debug($request->posterId);
-        $request->validate([
-            'name' => "required|max:255",
-            'images' => 'required|array|min:1',
-        ]);
-
-        $poster = User::select('firstName', 'lastName', 'posts')->where('id', $request->posterId)->first();
-
-        if(!$poster) {
-            return response()->json(['message' => "Account not found!"])->status(404);
-        }
-
-        $folderName = $poster->firstName . $poster->lastName;
-        $subFolderName = count($poster->posts);
-
-        $imagesUrls = [];
-        foreach ($request->images as $image) {
-            Log::debug($image);
-            //$imagesUrls[] = createImageFile($image, $folderName, $subFolderName);
-        }*/
-
         Post::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -62,7 +42,9 @@ class PostController extends Controller
             'video' => null,
         ]);
 
-        return response()->json(['message' => "Successful post!"]);
+        //return response()->json(['message' => "Successful post!"]);
+
+        Inertia::render('Profile');
     }
 
     /**
