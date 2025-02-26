@@ -49,4 +49,6 @@ Route::prefix('findUsers')->group(function () {
 
 Route::resource('posts', PostController::class);
 
+Route::post('/uploadImage', [UploadImageController::class, 'uploadImage'])
+
 Route::inertia('/*', 'NotFound');

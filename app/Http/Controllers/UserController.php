@@ -108,7 +108,7 @@ class UserController extends Controller
     
             //Stores the image url to the database as imagePath field
             DB::transaction(function () use ($id, $url) {
-                User::where('id', $id)->limit(1)->update(['imagePath' => $url]);
+                User::where('id', $id)->limit(1)->update(['imagePath' => $url]); 
             });
     
             //End of execution time
