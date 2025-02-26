@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->json('images')->default(json_encode([]));
-            $table->string('video');
-            $table->integer('likes');
+            $table->json('images')->nullable()->default(json_encode([]));
+            $table->string('video')->nullable();
+            $table->integer('likes')->default(0);
             $table->json('comments')->default(json_encode([]));
             $table->foreignId('poster')->nullable()->constrained('users')->onDelete('set null')->index();
             $table->timestamps();

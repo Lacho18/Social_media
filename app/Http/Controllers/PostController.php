@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 use App\Models\User;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -51,7 +52,17 @@ class PostController extends Controller
             //$imagesUrls[] = createImageFile($image, $folderName, $subFolderName);
         }*/
 
-        return response()->json(['message' => $request->images]);
+        Post::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'images' => $request->images,
+            'poster' => $request->posterId,
+            'comments' => [],
+            'likes' => 0,
+            'video' => null,
+        ]);
+
+        return response()->json(['message' => "Successful post!"]);
     }
 
     /**

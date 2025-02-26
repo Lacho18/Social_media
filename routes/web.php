@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GetUsersController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UploadImageController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -38,6 +39,8 @@ Route::post('/login', [UserController::class, 'login']);
 
 Route::post('/logout', [UserController::class, 'logout']);
 
+Route::post('/uploadImage/{id}', [UploadImageController::class, 'uploadImage']);
+
 Route::prefix('findUsers')->group(function () {
     Route::get('/getUser/{userID}', [GetUsersController::class, 'getUser']);
     Route::get('/recommendations/{currentUserID}', [GetUsersController::class, 'getRecommendations']);
@@ -48,7 +51,5 @@ Route::prefix('findUsers')->group(function () {
 });
 
 Route::resource('posts', PostController::class);
-
-Route::post('/uploadImage', [UploadImageController::class, 'uploadImage'])
 
 Route::inertia('/*', 'NotFound');
