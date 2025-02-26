@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding basic components to the CreatePost page"
+git commit -m "Adding component to visualize collection of images on create post view"
 git branch -M main
 git push -u origin main

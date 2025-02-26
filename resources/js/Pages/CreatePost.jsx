@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ImagesCollection from "./ProfileComponents/ImagesCollection";
 
 export default function CreatePost() {
     /*
@@ -57,7 +58,7 @@ export default function CreatePost() {
                             placeholder="Post description"
                         />
                     </div>
-                    <div className="flex gap-2 justify-start items-start pl-14 pr-14">
+                    <div className="flex gap-2 justify-start items-start pl-14 pr-14 h-auto">
                         <div className="w-1/3">
                             <p>Insert image or images</p>
                             <input type="file" onChange={addImageHandler} />
@@ -70,7 +71,13 @@ export default function CreatePost() {
                                 />
                             )}
                         </div>
-                        <div className="w-1/3 p-3 flex flex-wrap">
+                        <ImagesCollection
+                            images1={visualImages}
+                            selectImageHandler={(selImage) =>
+                                setSelectedImage(selImage)
+                            }
+                        />
+                        {/*<div className="w-1/3 p-3 flex flex-wrap">
                             {visualImages.map((image) => (
                                 <button
                                     className="ml-1 mr-1 mb-2"
@@ -87,7 +94,7 @@ export default function CreatePost() {
                                     <img src={image} />
                                 </button>
                             ))}
-                        </div>
+                        </div>*/}
                     </div>
                 </div>
             </div>
