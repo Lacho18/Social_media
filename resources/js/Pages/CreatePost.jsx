@@ -72,7 +72,7 @@ export default function CreatePost() {
                             )}
                         </div>
                         <ImagesCollection
-                            images1={visualImages}
+                            images={visualImages}
                             selectImageHandler={(selImage) =>
                                 setSelectedImage(selImage)
                             }

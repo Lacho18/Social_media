@@ -1,53 +1,8 @@
 import { useEffect, useState } from "react";
 
-export default function ImagesCollection({ images1, selectImageHandler }) {
-    const images = [
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Ahri_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Yasuo_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Jinx_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Thresh_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Zed_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Ekko_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Lux_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/MissFortune_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Darius_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Akali_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Ahri_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Yasuo_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Jinx_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Thresh_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Zed_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Ekko_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Lux_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/MissFortune_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Darius_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Akali_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Ahri_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Yasuo_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Jinx_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Thresh_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Zed_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Ekko_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Lux_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/MissFortune_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Darius_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Akali_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Ahri_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Yasuo_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Jinx_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Thresh_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Zed_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Ekko_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Lux_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/MissFortune_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Darius_0.jpg",
-        "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Akali_0.jpg",
-    ];
+export default function ImagesCollection({ images, selectImageHandler }) {
     const [imagesCollection, setImagesCollection] = useState([]);
     const [indexCollection, setIndexCollection] = useState(0);
-
-    console.log(imagesCollection);
-    console.log(images);
 
     useEffect(() => {
         if (images.length >= 8) {
@@ -60,7 +15,7 @@ export default function ImagesCollection({ images1, selectImageHandler }) {
                 return newValue;
             });
         }
-    }, [images1]);
+    }, [images]);
 
     function chunkArray(array, size) {
         let result = [];
