@@ -39,7 +39,7 @@ Route::post('/login', [UserController::class, 'login']);
 
 Route::post('/logout', [UserController::class, 'logout']);
 
-Route::post('/uploadImage/{id}', [UploadImageController::class, 'uploadImage']);
+Route::post('/uploadImage/{id}', [UploadImageController::class, 'uploadImage']);         
 
 Route::prefix('findUsers')->group(function () {
     Route::get('/getUser/{userID}', [GetUsersController::class, 'getUser']);
