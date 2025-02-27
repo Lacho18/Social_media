@@ -84,7 +84,7 @@ export default function Profile() {
             />
             <div className="h-[calc(100vh-70px)] flex text-white">
                 <FriendsSideBar />
-                <PostsView />
+                <PostsView userId={globalUser.id} />
                 <RecommendationsSideBar
                     currentUserId={globalUser.id}
                     friendRequestHandler={friendRequestHandler}

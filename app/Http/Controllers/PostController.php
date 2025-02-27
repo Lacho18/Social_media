@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(['message' => "Test message!"]);
     }
 
     /**
@@ -37,7 +37,7 @@ class PostController extends Controller
             'description' => $request->description,
             'images' => $request->images,
             'poster' => $request->posterId,
-            'comments' => [],
+            'comments' => [], 
             'likes' => 0,
             'video' => null,
         ]);
