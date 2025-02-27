@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 use App\Models\User;
-
+     
 class UploadImageController extends Controller
 {
     public function uploadImage(Request $request, $id) {
