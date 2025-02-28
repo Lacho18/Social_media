@@ -1,4 +1,4 @@
 git add .
-git commit -m "Added visual styling to posts"
+git commit -m "Adding String utils"
 git branch -M main
 git push -u origin main

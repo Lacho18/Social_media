@@ -5,6 +5,7 @@ import { createInertiaApp } from "@inertiajs/react";
 import { createRoot } from "react-dom/client";
 import { GlobalUserStateProvider } from "./Pages/context/userContext";
 import "./utils/dateUtils";
+import "./utils/stringUtils";
 
 createInertiaApp({
     resolve: (name) => {
