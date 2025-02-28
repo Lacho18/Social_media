@@ -23,6 +23,8 @@ Date.prototype.calculateTimeDistance = function () {
     let beforeYears = now.getFullYear() - this.getFullYear();
     let beforeMonths = now.getMonth() - this.getMonth();
     let beforeDays = now.getDate() - this.getDate();
+    let beforeHours = now.getHours() - this.getHours();
+    let beforeMinutes = now.getMinutes() - this.getMinutes();
 
     if (beforeMonths < 0) {
         beforeYears--;
@@ -34,7 +36,9 @@ Date.prototype.calculateTimeDistance = function () {
         beforeDays += 30;
     }
 
-    const result = `${beforeYears > 0 ? beforeYears + " years" : ""} ${beforeMonths > 0 ? beforeMonths + " months" : ""} ${beforeDays} days ago`;
+    const textResult = beforeDays > 0 ? beforeDays + " days ago" : beforeHours > 0 ? beforeHours + " hours ago" : beforeMinutes + " minutes ago";
+
+    const result = `${beforeYears > 0 ? beforeYears + " years" : ""} ${beforeMonths > 0 ? beforeMonths + " months" : ""} ${textResult}`;
 
     return result;
 }
