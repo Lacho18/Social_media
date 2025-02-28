@@ -21,7 +21,7 @@ class GetUsersController extends Controller
     public function getRecommendations(Request $request, $currentUserID) {
         try {
             $currentUser = User::find($currentUserID);
-
+ 
             if(!$currentUser) {
                 throw new Exception;
             }

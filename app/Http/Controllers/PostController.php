@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
 use App\Models\Post;
@@ -14,6 +15,7 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
+    //Gets post for the given user. The posts are only his and by his friends
     public function index(Request $request)
     {
         $userID = $request->query('user');
@@ -22,7 +24,20 @@ class PostController extends Controller
         $friends = $user->friends;
         array_push($friends, $userID);
 
-        $posts = Post::whereIn('poster', $friends);
+        //Gets the posts with data about the user that posts them
+        $posts = DB::table('posts')
+                ->join('users', 'posts.poster', '=', 'users.id')
+                ->whereIn('poster', $friends)
+                ->select('posts.*', 'users.firstName', 'users.lastName', 'users.imagePath', "users.friends")
+                ->get();
+
+        //DB table returns arrays as strings. Decodes the array to be actual arrays
+        $posts = $posts->map(function ($post) {
+            $post->images = json_decode($post->images, true); 
+            $post->comments = json_decode($post->comments, true); 
+            return $post;
+        });
+
         return response()->json(['message' => "Test message!", "postsData" => $posts]);
     }
 
@@ -39,7 +54,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        Post::create([
+        $newPost = Post::create([
             'name' => $request->name,
             'description' => $request->description,
             'images' => $request->images,
@@ -49,7 +64,11 @@ class PostController extends Controller
             'video' => null,
         ]);
 
-        //return response()->json(['message' => "Successful post!"]);
+        $user = User::find($request->posterId);
+        $posts = $user->posts;
+        array_push($posts, $newPost->id);
+        $user->posts = $posts;
+        $user->save();
 
         Inertia::render('Profile');
     }
