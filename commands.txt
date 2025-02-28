@@ -1,4 +1,4 @@
 git add .
-git commit -m "Finalizing create post functionality"
+git commit -m "Adding get method for posts"
 git branch -M main
 git push -u origin main

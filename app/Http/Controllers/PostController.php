@@ -14,9 +14,16 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(['message' => "Test message!"]);
+        $userID = $request->query('user');
+        $user = User::select('friends')->where("id", $userID)->first();
+
+        $friends = $user->friends;
+        array_push($friends, $userID);
+
+        $posts = Post::whereIn('poster', $friends);
+        return response()->json(['message' => "Test message!", "postsData" => $posts]);
     }
 
     /**

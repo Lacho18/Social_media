@@ -6,10 +6,11 @@ export default function PostsView({ userId }) {
 
     useEffect(() => {
         async function getPosts() {
-            const response = await axios.get("/posts");
+            const response = await axios.get("/posts?user=" + userId);
 
             if (response.status === 200) {
                 console.log(response.data.message);
+                console.log(response.data.postsData);
             }
         }
 
