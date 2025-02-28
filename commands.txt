@@ -1,4 +1,4 @@
 git add .
-git commit -m "Creating image slider"
+git commit -m "Adding like post functionality"
 git branch -M main
 git push -u origin main

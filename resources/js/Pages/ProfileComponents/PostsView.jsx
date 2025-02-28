@@ -4,6 +4,8 @@ import ImageSlider from "./ImageSlider";
 
 export default function PostsView({ userId }) {
     const [posts, setPosts] = useState([]);
+    const [likedPosts, setLikedPosts] = useState([]);
+    const [viewComments, setViewComments] = useState(false);
 
     useEffect(() => {
         async function getPosts() {
@@ -11,9 +13,7 @@ export default function PostsView({ userId }) {
 
             if (response.status === 200) {
                 console.log(response.data.message);
-                console.log(
-                    response.data.postsData[0].created_at.calcTimeOFStringDate()
-                );
+                console.log(response.data.postsData[0]);
                 setPosts(response.data.postsData);
             }
         }
@@ -21,9 +21,32 @@ export default function PostsView({ userId }) {
         getPosts();
     }, []);
 
+    async function likePostHandler(postId, index) {
+        const response = await axios.put("/posts/" + postId, {
+            likePost: true,
+            likedFrom: userId,
+        });
+
+        if (response.status === 200) {
+            setLikedPosts(response.data.likedPosts);
+
+            console.log(response.data.likedPosts);
+
+            setPosts((oldPosts) => {
+                let newPosts = [...oldPosts];
+                newPosts[index] = {
+                    ...newPosts[index],
+                    likes: response.data.updatedPost.likes,
+                };
+
+                return newPosts;
+            });
+        }
+    }
+
     return (
         <div className="w-1/2 h-full max-h-full flex flex-col items-center overflow-y-scroll gap-10">
-            {posts.map((post) => (
+            {posts.map((post, index) => (
                 <div
                     className="flex flex-col gap-2 bg-blue-950 w-3/4 mt-3 mb-3 p-3 rounded-lg"
                     style={{
@@ -49,12 +72,16 @@ export default function PostsView({ userId }) {
                     <ImageSlider images={post.images} />
                     <div className="flex gap-4">
                         <div className="flex gap-2">
-                            <button>🤍</button>
-                            <p>likes</p>
+                            <button
+                                onClick={() => likePostHandler(post.id, index)}
+                            >
+                                {likedPosts.includes(post.id) ? "❤️" : "🤍"}
+                            </button>
+                            <p>{post.likes} likes</p>
                         </div>
                         <div className="flex gap-2">
                             <button>🌐</button>
-                            <p>comments</p>
+                            <p>{post.comments.length} comments</p>
                         </div>
                     </div>
                 </div>

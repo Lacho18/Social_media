@@ -94,7 +94,16 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $post = Post::find($id);
+        $result;
+        //Handles the update request on liked post
+        if($request->likePost) {
+           $result = likePostHandler($request, $post);
+        }
+        $post = $result["post"];
+        $post->save();
+
+        return response()->json(['message' => $request->likePost, "updatedPost" => $post, "likedPosts" => $result["likedPosts"]]);
     }
 
     /**
@@ -114,4 +123,35 @@ function createImageFile($image, $folderName, $subFolderName)
     $url = asset('storage/' . $path . '/' . $fileName);
 
     return $url;
+}
+
+//Handles the liking of a post changes to the database
+function likePostHandler($request, $post) {
+    $userLiked = User::find($request->likedFrom);
+    $likedPosts = $userLiked->likedPosts;
+
+    //If the post is already liked
+    if(in_array($post->id, $likedPosts)) {
+        //Removes the post id from the user likedPosts array
+        $likedPosts = array_filter($likedPosts, function ($likedPost) use ($post) {
+            return $likedPost != $post->id;
+        });
+
+        //Decrements the post likes
+        $post->likes = $post->likes - 1;
+    }
+    //If the post is not liked
+    else {
+        //Adds the id to user likedPosts array
+        array_push($likedPosts, $post->id);
+
+        //increments the likes counter of the post
+        $post->likes = $post->likes + 1;
+    }
+
+    //Saves the changes to the user
+    $userLiked->likedPosts = $likedPosts;
+    $userLiked->save();
+
+    return ["post" => $post, "likedPosts" => array_values($likedPosts)];
 }
