@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding fixes to get posts controller"
+git commit -m "Added visual styling to posts"
 git branch -M main
 git push -u origin main
