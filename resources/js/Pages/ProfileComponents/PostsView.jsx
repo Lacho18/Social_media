@@ -11,7 +11,9 @@ export default function PostsView({ userId }) {
 
             if (response.status === 200) {
                 console.log(response.data.message);
-                console.log(response.data.postsData[0].created_at.getDate());
+                console.log(
+                    response.data.postsData[0].created_at.calcTimeOFStringDate()
+                );
                 setPosts(response.data.postsData);
             }
         }
@@ -29,18 +31,20 @@ export default function PostsView({ userId }) {
                         border: "3px solid #110d21",
                     }}
                 >
-                    <div className="flex gap-2">
+                    <div className="flex items-center gap-2">
                         <img
                             className="w-12 h-12 rounded-full"
                             src={post.imagePath}
                         />
                         <p>{post.firstName}</p>
                         <p>{post.lastName}</p>
-                        <p>time</p>
+                        <p className="text-gray-700">
+                            ⚈ {post.created_at.calcTimeOFStringDate()}
+                        </p>
                     </div>
                     <div>
-                        <p>{post.name}</p>
-                        <p>{post.description}</p>
+                        <p className="text-lg">{post.name}</p>
+                        <p className="text-gray-600">{post.description}</p>
                     </div>
                     <ImageSlider images={post.images} />
                     <div className="flex gap-4">
