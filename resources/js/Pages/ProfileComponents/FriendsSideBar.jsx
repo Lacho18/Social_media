@@ -29,7 +29,11 @@ export default function FriendsSideBar() {
                 <div className="border-t-2 border-blue-950 flex flex-col gap-2">
                     {friends.length > 0 ? (
                         friends.map((user) => (
-                            <ProfileSideBar user={user} addButton={false} />
+                            <ProfileSideBar
+                                key={user.id}
+                                user={user}
+                                addButton={false}
+                            />
                         ))
                     ) : (
                         <p className="text-center m-3 text-sm">

@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding get method for posts"
+git commit -m "Adding key value to mapping"
 git branch -M main
 git push -u origin main

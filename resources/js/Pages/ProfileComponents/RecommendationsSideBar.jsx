@@ -40,6 +40,7 @@ export default function RecommendationsSideBar({
                 <div className="border-t-2 border-blue-950 flex flex-col gap-2">
                     {recommendedUsers.map((user) => (
                         <ProfileSideBar
+                            key={user.id}
                             user={user}
                             addButton={true}
                             friendRequestHandler={friendRequestHandler}
