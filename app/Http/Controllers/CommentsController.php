@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Comments;
+use App\Models\User;
 
 class CommentsController extends Controller
 {
@@ -42,6 +43,12 @@ class CommentsController extends Controller
             'userId' => $request->userId,
             'postId' => $request->postId,
         ]);
+
+        $user = User::find($request->userId);
+
+        $newComment->firstName = $user->firstName;
+        $newComment->lastName = $user->lastName;
+        $newComment->imagePath = $user->imagePath;
 
         return response()->json(['message' => "Successful request!", "newComment" => $newComment]);
     }

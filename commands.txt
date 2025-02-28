@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding post comments functionality"
+git commit -m "Finalizing comments visual and post and get logic"
 git branch -M main
 git push -u origin main
