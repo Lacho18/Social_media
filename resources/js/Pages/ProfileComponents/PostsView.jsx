@@ -6,6 +6,7 @@ import PostCommentsSection from "./PostCommentsSection";
 export default function PostsView({ userId }) {
     const [posts, setPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState([]);
+    const [commentsIndexes, setCommentsIndexes] = useState([]);
     const [viewComments, setViewComments] = useState(false);
 
     useEffect(() => {
@@ -45,10 +46,28 @@ export default function PostsView({ userId }) {
         }
     }
 
+    function viewCommentsHandler(index) {
+        console.log(commentsIndexes);
+        if (commentsIndexes.includes(index)) {
+            setCommentsIndexes((oldValue) => {
+                const newValue = oldValue.filter((value) => value !== index);
+
+                return newValue;
+            });
+        } else {
+            setCommentsIndexes((oldValue) => {
+                const newValue = [...oldValue, index];
+
+                return newValue;
+            });
+        }
+    }
+
     return (
         <div className="w-1/2 h-full max-h-full flex flex-col items-center overflow-y-scroll gap-10">
             {posts.map((post, index) => (
                 <div
+                    key={post.id}
                     className="flex flex-col gap-2 bg-blue-950 w-3/4 mt-3 mb-3 p-3 rounded-lg"
                     style={{
                         backgroundColor: "#181233",
@@ -81,11 +100,15 @@ export default function PostsView({ userId }) {
                             <p>{post.likes} likes</p>
                         </div>
                         <div className="flex gap-2">
-                            <button>🌐</button>
+                            <button onClick={() => viewCommentsHandler(index)}>
+                                🌐
+                            </button>
                             <p>{post.comments.length} comments</p>
                         </div>
                     </div>
-                    {viewComments && <PostCommentsSection postId={post.id} />}
+                    {commentsIndexes.includes(index) && (
+                        <PostCommentsSection postId={post.id} userId={userId} />
+                    )}
                 </div>
             ))}
         </div>

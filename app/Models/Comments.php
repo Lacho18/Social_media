@@ -15,6 +15,8 @@ class Comments extends Model
     // Define the fillable attributes for mass assignment
     protected $fillable = [
         'context',
+        'userId',
+        'postId',
     ];
 
     public function poster()
