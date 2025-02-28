@@ -3,15 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $postId = $request->query("postId");
+
+        $comments = DB::table("comments")
+                    ->join("users", "comments.userId", "=", "users.id")
+                    ->select('comments.*', 'users.firstName', 'users.lastName', 'users.imagePath');
+        
+        return response()->json(["message" => "Successful request!", "comments" => $comments]);
     }
 
     /**

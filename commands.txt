@@ -1,4 +1,4 @@
 git add .
-git commit -m "Creating comments table"
+git commit -m "Adding get comments functionality"
 git branch -M main
 git push -u origin main
