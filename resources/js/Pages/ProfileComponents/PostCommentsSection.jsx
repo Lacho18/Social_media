@@ -29,16 +29,16 @@ export default function PostCommentsSection({ postId, userId }) {
             });
 
             if (response.status === 200) {
-                console.log(response.data.message);
+                console.log(response.data.newComment);
 
-                setComments((oldComments) => {
+                /*setComments((oldComments) => {
                     const newComments = [
                         ...oldComments,
                         response.data.newComment,
                     ];
 
                     return newComments;
-                });
+                });*/
             }
         }
     }

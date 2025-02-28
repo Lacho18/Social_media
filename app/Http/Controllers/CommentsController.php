@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Comments;
 use App\Models\User;
+use App\Models\Post;
 
 class CommentsController extends Controller
 {
@@ -38,19 +39,37 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
+        //Creating the comment
         $newComment = Comments::create([
             'context' => $request->context,
             'userId' => $request->userId,
             'postId' => $request->postId,
         ]);
 
-        $user = User::find($request->userId);
+        //Getting the poster of the comment
+        $user = User::findOrFail($request->userId);
 
+        //Getting the post for which the comment will be
+        $post = Post::findOrFail($request->postId);
+
+        //Getting necessary data for real time visual update 
         $newComment->firstName = $user->firstName;
         $newComment->lastName = $user->lastName;
         $newComment->imagePath = $user->imagePath;
 
-        return response()->json(['message' => "Successful request!", "newComment" => $newComment]);
+        //Adding the new comment id to the user
+        /*if(!in_array($newComment->id, $user->comments)) {
+            $user->comments[] = $newComment->id;
+        }*/
+        //$user->save();
+
+        //Adding the new comment id to the post
+        if (!in_array($newComment->id, $post->comments)) {
+            $post->comments[] = $newComment->id;
+        }
+        //$post->save();
+
+        return response()->json(['message' => "Successful request!", "newComment" => $user->comments]);
     }
 
     /**

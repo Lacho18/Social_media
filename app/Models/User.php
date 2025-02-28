@@ -44,6 +44,7 @@ class User extends Authenticatable
         'rejectedRequests' => 'array',
         'requests' => 'array',
         'posts' => 'array',
+        'comments' => 'array',
     ];
 
     /**
