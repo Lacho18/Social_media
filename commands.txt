@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding like post functionality"
+git commit -m "Creating comments table"
 git branch -M main
 git push -u origin main

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ImageSlider from "./ImageSlider";
+import PostCommentsSection from "./PostCommentsSection";
 
 export default function PostsView({ userId }) {
     const [posts, setPosts] = useState([]);
@@ -84,6 +85,7 @@ export default function PostsView({ userId }) {
                             <p>{post.comments.length} comments</p>
                         </div>
                     </div>
+                    {viewComments && <PostCommentsSection postId={post.id} />}
                 </div>
             ))}
         </div>

@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GetUsersController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UploadImageController;
+use App\Http\Controllers\CommentsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -51,5 +52,7 @@ Route::prefix('findUsers')->group(function () {
 });
 
 Route::resource('posts', PostController::class);
+
+Route::resource('comments', CommentsController::class);
 
 Route::inertia('/*', 'NotFound');

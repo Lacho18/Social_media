@@ -1,28 +1,20 @@
 <?php
 
 namespace App\Models;
- 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Comments extends Model
 {
     use HasFactory;
 
     // Specify the table name if it's not the default
-    protected $table = 'posts';
+    protected $table = 'comments';
 
     // Define the fillable attributes for mass assignment
     protected $fillable = [
-        'name',
-        'description',
-        'images',
-        'poster',
-    ];
-
-    protected $casts = [
-        'images' => 'array',
-        'comments' => 'array',
+        'context',
     ];
 
     public function poster()
