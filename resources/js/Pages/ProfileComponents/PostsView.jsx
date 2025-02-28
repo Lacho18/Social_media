@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import ImageSlider from "./ImageSlider";
 import PostCommentsSection from "./PostCommentsSection";
 
-export default function PostsView({ userId }) {
+export default function PostsView({ userId, userLikedPosts }) {
     const [posts, setPosts] = useState([]);
-    const [likedPosts, setLikedPosts] = useState([]);
+    const [likedPosts, setLikedPosts] = useState(userLikedPosts);
     const [commentsIndexes, setCommentsIndexes] = useState([]);
-    const [viewComments, setViewComments] = useState(false);
+
+    console.log(likedPosts);
 
     useEffect(() => {
         async function getPosts() {

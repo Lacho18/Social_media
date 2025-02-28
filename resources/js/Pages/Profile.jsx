@@ -19,8 +19,6 @@ export default function Profile() {
         }
     }, []);
 
-    console.log(user);
-
     const { data, setData, post, errors } = useForm({
         image: null,
     });
@@ -84,7 +82,10 @@ export default function Profile() {
             />
             <div className="h-[calc(100vh-70px)] flex text-white">
                 <FriendsSideBar />
-                <PostsView userId={globalUser.id} />
+                <PostsView
+                    userId={globalUser.id}
+                    userLikedPosts={globalUser.likedPosts}
+                />
                 <RecommendationsSideBar
                     currentUserId={globalUser.id}
                     friendRequestHandler={friendRequestHandler}
