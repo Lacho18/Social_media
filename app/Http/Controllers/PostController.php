@@ -155,18 +155,18 @@ class PostController extends Controller
         Comments::where('postId', $id)->delete();
 
         //Deleting the comments ids from every user
-        User::all()->each(function ($user) use ($deletedComments) {
+        User::all()->each(function ($user) use ($deletedComments, $id) {
             $userComments = $user->comments;
 
             foreach(['posts', 'likedPosts', 'personalPosts'] as $column) {
-                $array = $user->column;
+                $array = $user->$column;
 
                 if (!is_array($array)) {
                     continue;
                 }
 
                 $array = array_values(array_diff($array, [$id]));
-                $user->column = $array;
+                $user->$column = $array;
                 $user->save();
             }
 
