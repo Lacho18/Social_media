@@ -118,43 +118,11 @@ class PostController extends Controller
             return response()->json(['message' => "Post not found!"], 404);
         }
 
-        //Deletes the postId from posts and likedPosts array of the user
-        /*$poster = User::find($post->poster);
-        foreach (['posts', 'likedPosts', 'personalPosts'] as $column) {
-            $array = $poster->column;
-
-            if (!is_array($array)) {
-                continue;
-            }
-
-            $array = array_values(array_diff($array, [$id]));
-            $poster->column = $array;
-        }
-
         //Deleting every comment for the deleted post
         $deletedComments = Comments::where('postId', $id)->pluck('id')->toArray();
         Comments::where('postId', $id)->delete();
 
-        //Updating the user comments array
-        $posterComments = $poster->comments;
-        $posterComments = array_filter($posterComments, function ($commentId) use ($deletedComments) {
-            return !in_array($commentId, $deletedComments);
-        });
-        $poster->comments = $posterComments;
-        $poster->save();*/
-
-        //Updating posts, likedPosts and personal posts of user after deleting the post
-        /*User::query()->update([
-            'posts' => DB::raw("jsonb_set(\"posts\"::jsonb, '{}', COALESCE((SELECT jsonb_agg(value) FROM jsonb_array_elements(\"posts\"::jsonb) WHERE value::text <> '$id'::text), '[]'::jsonb))"),
-            'likedPosts' => DB::raw("jsonb_set(\"likedPosts\"::jsonb, '{}', COALESCE((SELECT jsonb_agg(value) FROM jsonb_array_elements(\"likedPosts\"::jsonb) WHERE value::text <> '$id'::text), '[]'::jsonb))"),
-            'personalPosts' => DB::raw("jsonb_set(\"personalPosts\"::jsonb, '{}', COALESCE((SELECT jsonb_agg(value) FROM jsonb_array_elements(\"personalPosts\"::jsonb) WHERE value::text <> '$id'::text), '[]'::jsonb))"),
-        ]);*/
-
-        //Deleting every comment for the deleted post
-        $deletedComments = Comments::where('postId', $id)->pluck('id')->toArray();
-        Comments::where('postId', $id)->delete();
-
-        //Deleting the comments ids from every user
+        //Deleting the comments ids from every user and also the post id from every user fields posts, likedPosts and personalPosts if it is there
         User::all()->each(function ($user) use ($deletedComments, $id) {
             $userComments = $user->comments;
 

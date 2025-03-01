@@ -1,4 +1,4 @@
 git add .
-git commit -m "Finalize deleting post method"
+git commit -m "Adding visual update to deleting post functionality"
 git branch -M main
 git push -u origin main

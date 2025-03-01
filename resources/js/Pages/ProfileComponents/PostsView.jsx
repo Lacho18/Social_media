@@ -101,7 +101,12 @@ export default function PostsView({ userId, userLikedPosts }) {
                             </button>
                             <button
                                 className="border-2 border-gray-700 rounded-lg p-2 bg-red-800"
-                                onClick={() => deletePostHandler(post.id)}
+                                onClick={async () => {
+                                    const filteredPosts =
+                                        await deletePostHandler(post.id, posts);
+
+                                    setPosts(filteredPosts);
+                                }}
                             >
                                 Delete post
                             </button>
