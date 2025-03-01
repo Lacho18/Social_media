@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Comments;
 
 class PostController extends Controller
 {
@@ -111,7 +112,36 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::find($id);
+
+        if(!$post) {
+            return response()->json(['message' => "Post not found!"], 404);
+        }
+
+        //Deletes the postId from posts array of the user
+        $poster = User::find($post->poster);
+        $posterPosts = $poster->posts;
+        $posterPosts = array_filter($posterPosts, function ($postId) use ($id){
+            return $postId != $id;
+        });
+        $poster->posts = $posterPosts;
+
+        //Deleting every comment for the deleted post
+        $deletedComments = Comments::where('postId', $id)->pluck('id')->toArray();
+        Comments::where('postId', $id)->delete();
+
+        //Updating the user comments array
+        $posterComments = $poster->comments;
+        $posterComments = array_filter($posterComments, function ($commentId) use ($deletedComments) {
+            return !in_array($commentId, $deletedComments);
+        });
+        $poster->comments = $posterComments;
+        $poster->save();
+
+        //Deleting the post
+        $post->delete();
+
+        return response()->json(['message' => "Successful request!"]);
     }
 }
 

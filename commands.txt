@@ -1,4 +1,4 @@
 git add .
-git commit -m "Fixed problem with comments"
+git commit -m "Adding function for deleting post"
 git branch -M main
 git push -u origin main
