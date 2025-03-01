@@ -118,13 +118,18 @@ class PostController extends Controller
             return response()->json(['message' => "Post not found!"], 404);
         }
 
-        //Deletes the postId from posts array of the user
-        $poster = User::find($post->poster);
-        $posterPosts = $poster->posts;
-        $posterPosts = array_filter($posterPosts, function ($postId) use ($id){
-            return $postId != $id;
-        });
-        $poster->posts = $posterPosts;
+        //Deletes the postId from posts and likedPosts array of the user
+        /*$poster = User::find($post->poster);
+        foreach (['posts', 'likedPosts', 'personalPosts'] as $column) {
+            $array = $poster->column;
+
+            if (!is_array($array)) {
+                continue;
+            }
+
+            $array = array_values(array_diff($array, [$id]));
+            $poster->column = $array;
+        }
 
         //Deleting every comment for the deleted post
         $deletedComments = Comments::where('postId', $id)->pluck('id')->toArray();
@@ -136,7 +141,33 @@ class PostController extends Controller
             return !in_array($commentId, $deletedComments);
         });
         $poster->comments = $posterComments;
-        $poster->save();
+        $poster->save();*/
+
+        //Updating posts, likedPosts and personal posts of user after deleting the post
+        User::query()->update([
+            'posts' => DB::raw("JSON_REMOVE(posts, 
+                JSON_UNQUOTE(JSON_SEARCH(posts, 'one', '$id')))"),
+            'likedPosts' => DB::raw("JSON_REMOVE(likedPosts, 
+                JSON_UNQUOTE(JSON_SEARCH(likedPosts, 'one', '$id')))"),
+            'personalPosts' => DB::raw("JSON_REMOVE(personalPosts, 
+                JSON_UNQUOTE(JSON_SEARCH(personalPosts, 'one', '$id')))"),
+        ]);
+
+        //Deleting every comment for the deleted post
+        $deletedComments = Comments::where('postId', $id)->pluck('id')->toArray();
+        Comments::where('postId', $id)->delete();
+
+        //Deleting the comments ids from every user
+        User::all()->each(function ($user) use ($deletedComments) {
+            $userComments = $user->comments;
+
+            if(is_array($userComments)) {
+                $updatedComments = array_values(array_diff($userComments, $deletedComments));
+
+                $user->comments = $updatedComments;
+                $user->save();
+            }
+        });
 
         //Deleting the post
         $post->delete();

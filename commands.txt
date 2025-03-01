@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding function for deleting post"
+git commit -m "Adding fixes to function for deleting post"
 git branch -M main
 git push -u origin main
