@@ -20,7 +20,7 @@ export default function RequestsView({ userRequests, userId }) {
 
     return (
         <div
-            className="absolute w-3/5 min-h-64 max-h-68 overflow-scroll bg-blue-800 mt-20 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col rounded-md"
+            className="absolute w-3/5 min-h-64 max-h-68 overflow-scroll bg-blue-800 mt-20 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col rounded-md z-40"
             style={{ backgroundColor: "#516691", border: "1px solid #8fa3cc" }}
         >
             {userRequests.length > 0 ? (
