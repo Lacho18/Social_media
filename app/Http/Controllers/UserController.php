@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Comments;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
@@ -126,4 +128,39 @@ class UserController extends Controller
         }
     }
     
+
+    public function deleteUser($id) {
+        //Deletes the user
+        $user = User::find($user);
+
+        //Deleting user comments
+        $deletedComments = Comments::where('userId', $id)->pluck('id')->toArray();
+        Comments::where('postId', $id)->delete();
+
+        Post::all()->each(function ($post) use ($deletedComments, $id, $user) {
+            //Deletes the post if the poster is the deleted user  
+            if($post->poster == $id) {
+                $post->delete();
+                continue;
+            }
+
+            //Deletes all the comments from every post of the deleted user
+            $postComments = $post->comments;
+
+            if(is_array($postComments)) {
+                $updatedComments = array_values(array_diff($postComments, $deletedComments));
+
+                $post->comments = $updatedComments;
+            }
+
+            //Decrements the likes counter if the deleted user has liked the post
+            if(in_array($post->id, $user->likedPosts)) {
+                $post->likes -= 1;
+            }
+
+            $post->save();
+        });
+
+        $user->delete();
+    }
 }

@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding visual update to deleting post functionality"
+git commit -m "Creating function for deleting user"
 git branch -M main
 git push -u origin main
