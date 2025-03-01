@@ -8,15 +8,12 @@ export default function PostsView({ userId, userLikedPosts }) {
     const [likedPosts, setLikedPosts] = useState(userLikedPosts);
     const [commentsIndexes, setCommentsIndexes] = useState([]);
 
-    console.log(likedPosts);
-
     useEffect(() => {
         async function getPosts() {
             const response = await axios.get("/posts?user=" + userId);
 
             if (response.status === 200) {
                 console.log(response.data.message);
-                console.log(response.data.postsData[0]);
                 setPosts(response.data.postsData);
             }
         }
@@ -48,7 +45,6 @@ export default function PostsView({ userId, userLikedPosts }) {
     }
 
     function viewCommentsHandler(index) {
-        console.log(commentsIndexes);
         if (commentsIndexes.includes(index)) {
             setCommentsIndexes((oldValue) => {
                 const newValue = oldValue.filter((value) => value !== index);

@@ -31,40 +31,52 @@ export default function PostCommentsSection({ postId, userId }) {
             if (response.status === 200) {
                 console.log(response.data.newComment);
 
-                /*setComments((oldComments) => {
+                setComments((oldComments) => {
                     const newComments = [
                         ...oldComments,
                         response.data.newComment,
                     ];
 
                     return newComments;
-                });*/
+                });
             }
         }
+    }
+
+    if (comments[0]) {
+        console.log(comments[0].postId === postId);
+        console.log(postId);
     }
 
     return (
         <div className="w-full">
             <div className="w-full max-h-52 h-auto flex flex-col gap-2 overflow-y-scroll">
-                {comments.map((comment) => (
-                    <div key={comment.id}>
-                        <div className="flex items-center gap-4">
-                            <img
-                                className="w-10 h-10 rounded-full"
-                                src={comment.imagePath}
-                            />
-                            <p>
-                                <span className="font-bold mr-3">
-                                    {comment.firstName} {comment.lastName}
-                                </span>{" "}
-                                {comment.context}
-                            </p>
-                        </div>
-                        <p className="text-sm text-gray-700">
-                            {comment?.created_at.calcTimeOFStringDate()}
-                        </p>
-                    </div>
-                ))}
+                {comments.map((comment) => {
+                    if (comment.postId === postId) {
+                        return (
+                            <div key={comment.id}>
+                                <div className="flex items-center gap-4">
+                                    <img
+                                        className="w-10 h-10 rounded-full"
+                                        src={comment.imagePath}
+                                        alt="User Avatar"
+                                    />
+                                    <p>
+                                        <span className="font-bold mr-3">
+                                            {comment.firstName}{" "}
+                                            {comment.lastName}
+                                        </span>
+                                        {comment.context}
+                                    </p>
+                                </div>
+                                <p className="text-sm text-gray-700">
+                                    {comment?.created_at.calcTimeOFStringDate()}
+                                </p>
+                            </div>
+                        );
+                    }
+                    return null; // Ensures `.map()` does not return `undefined`
+                })}
             </div>
             <div className="mt-3 p-3">
                 <input

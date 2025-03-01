@@ -1,4 +1,4 @@
 git add .
-git commit -m "Fix problem with liked posts visual"
+git commit -m "Fixed problem with comments"
 git branch -M main
 git push -u origin main

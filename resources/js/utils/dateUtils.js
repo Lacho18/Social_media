@@ -16,6 +16,8 @@ Date.prototype.calculateAge = function () {
 Date.prototype.calculateTimeDistance = function () {
     let now = new Date();
 
+    console.log(this);
+
     if (now < this) {
         return "The given date should be past";
     }

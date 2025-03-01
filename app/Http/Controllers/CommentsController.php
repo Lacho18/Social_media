@@ -58,18 +58,23 @@ class CommentsController extends Controller
         $newComment->imagePath = $user->imagePath;
 
         //Adding the new comment id to the user
-        /*if(!in_array($newComment->id, $user->comments)) {
-            $user->comments[] = $newComment->id;
-        }*/
-        //$user->save();
+        if(!in_array($newComment->id, $user->comments)) {
+            $userComments = $user->comments;
+            array_push($userComments, $newComment->id);
+            $user->comments = $userComments;
+        }
+        $user->save();
 
         //Adding the new comment id to the post
         if (!in_array($newComment->id, $post->comments)) {
-            $post->comments[] = $newComment->id;
+            //$post->comments[] = $newComment->id;
+            $postComments = $post->comments;
+            array_push($postComments, $newComment->id);
+            $post->comments = $postComments;
         }
-        //$post->save();
+        $post->save();
 
-        return response()->json(['message' => "Successful request!", "newComment" => $user->comments]);
+        return response()->json(['message' => "Successful request!", "newComment" => $newComment]);
     }
 
     /**
