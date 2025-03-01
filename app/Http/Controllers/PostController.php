@@ -144,14 +144,11 @@ class PostController extends Controller
         $poster->save();*/
 
         //Updating posts, likedPosts and personal posts of user after deleting the post
-        User::query()->update([
-            'posts' => DB::raw("JSON_REMOVE(posts, 
-                JSON_UNQUOTE(JSON_SEARCH(posts, 'one', '$id')))"),
-            'likedPosts' => DB::raw("JSON_REMOVE(likedPosts, 
-                JSON_UNQUOTE(JSON_SEARCH(likedPosts, 'one', '$id')))"),
-            'personalPosts' => DB::raw("JSON_REMOVE(personalPosts, 
-                JSON_UNQUOTE(JSON_SEARCH(personalPosts, 'one', '$id')))"),
-        ]);
+        /*User::query()->update([
+            'posts' => DB::raw("jsonb_set(\"posts\"::jsonb, '{}', COALESCE((SELECT jsonb_agg(value) FROM jsonb_array_elements(\"posts\"::jsonb) WHERE value::text <> '$id'::text), '[]'::jsonb))"),
+            'likedPosts' => DB::raw("jsonb_set(\"likedPosts\"::jsonb, '{}', COALESCE((SELECT jsonb_agg(value) FROM jsonb_array_elements(\"likedPosts\"::jsonb) WHERE value::text <> '$id'::text), '[]'::jsonb))"),
+            'personalPosts' => DB::raw("jsonb_set(\"personalPosts\"::jsonb, '{}', COALESCE((SELECT jsonb_agg(value) FROM jsonb_array_elements(\"personalPosts\"::jsonb) WHERE value::text <> '$id'::text), '[]'::jsonb))"),
+        ]);*/
 
         //Deleting every comment for the deleted post
         $deletedComments = Comments::where('postId', $id)->pluck('id')->toArray();
@@ -160,6 +157,18 @@ class PostController extends Controller
         //Deleting the comments ids from every user
         User::all()->each(function ($user) use ($deletedComments) {
             $userComments = $user->comments;
+
+            foreach(['posts', 'likedPosts', 'personalPosts'] as $column) {
+                $array = $user->column;
+
+                if (!is_array($array)) {
+                    continue;
+                }
+
+                $array = array_values(array_diff($array, [$id]));
+                $user->column = $array;
+                $user->save();
+            }
 
             if(is_array($userComments)) {
                 $updatedComments = array_values(array_diff($userComments, $deletedComments));
