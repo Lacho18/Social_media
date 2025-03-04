@@ -17,12 +17,20 @@ export default function PostsView({ userId, userLikedPosts, filters }) {
 
     useEffect(() => {
         async function getPosts() {
-            const response = await axios.get(
+            /*const response = await axios.get(
                 `/posts?user=${userId}${filters ? "&filters=" + filters : ""}`
-            );
+            );*/
+
+            const response = await axios.get("/posts", {
+                params: {
+                    user: userId,
+                    filters: filters,
+                },
+            });
 
             if (response.status === 200) {
                 console.log(response.data.postsData);
+                console.log(response.data.filters);
                 setPosts(response.data.postsData);
             }
         }

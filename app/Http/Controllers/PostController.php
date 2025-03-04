@@ -20,6 +20,17 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $userID = $request->query('user');
+        $filters = $request->query('filters', []);
+        if(!is_array($filters)) {
+            $filters = "";
+        }
+        else {
+            $filters = collect($filters)->mapWithKeys(function ($value, $key) {
+                return ["posts.$key" => $value];
+            })->toArray();
+        }
+
+        Log::debug($filters);
         $user = User::select('friends')->where("id", $userID)->first();
 
         $friends = $user->friends;
@@ -28,6 +39,9 @@ class PostController extends Controller
         //Gets the posts with data about the user that posts them
         $posts = DB::table('posts')
                 ->join('users', 'posts.poster', '=', 'users.id')
+                ->when(!empty($filters), function ($query) use ($filters) {
+                    return $query->where($filters); 
+                })
                 ->whereIn('poster', $friends)
                 ->select('posts.*', 'users.firstName', 'users.lastName', 'users.imagePath', "users.friends")
                 ->get();
@@ -39,7 +53,7 @@ class PostController extends Controller
             return $post;
         });
 
-        return response()->json(['message' => "Test message!", "postsData" => $posts]);
+        return response()->json(['message' => "Test message!", "postsData" => $posts, "filters"=>$filters]);
     }
 
     /**

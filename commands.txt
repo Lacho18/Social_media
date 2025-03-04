@@ -1,4 +1,4 @@
 git add .
-git commit -m "Fixing bug with PostsView component"
+git commit -m "Adding filters functionality to get posts request"
 git branch -M main
 git push -u origin main

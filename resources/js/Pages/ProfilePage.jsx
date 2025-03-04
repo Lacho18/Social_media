@@ -135,8 +135,8 @@ export default function ProfilePage() {
                 <div className="border-t-2 border-gray-700 rounded-xl m-4 p-2">
                     <PostsView
                         userId={globalUser.id}
-                        likedPosts={globalUser.likedPosts}
-                        filters={[{ id: userId }]}
+                        userLikedPosts={globalUser.likedPosts}
+                        filters={{ poster: userId }}
                     />
                 </div>
             </div>
