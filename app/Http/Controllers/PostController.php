@@ -53,7 +53,7 @@ class PostController extends Controller
             return $post;
         });
 
-        return response()->json(['message' => "Test message!", "postsData" => $posts, "filters"=>$filters]);
+        return response()->json(['message' => "Test message!", "postsData" => $posts]);
     }
 
     /**

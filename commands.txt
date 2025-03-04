@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding filters functionality to get posts request"
+git commit -m "Fixing bug with profile page friends logic"
 git branch -M main
 git push -u origin main

@@ -27,7 +27,9 @@ export default function ProfilePage() {
 
                     return userData;
                 });
-                areFriends.current = globalUser.friends.includes(userId);
+                areFriends.current = globalUser.friends.includes(
+                    Number(userId)
+                );
             }
         }
 
@@ -137,6 +139,7 @@ export default function ProfilePage() {
                         userId={globalUser.id}
                         userLikedPosts={globalUser.likedPosts}
                         filters={{ poster: userId }}
+                        profilePage={true}
                     />
                 </div>
             </div>

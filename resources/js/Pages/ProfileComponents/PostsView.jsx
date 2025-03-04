@@ -5,7 +5,12 @@ import PostCommentsSection from "./PostCommentsSection";
 
 import { deletePostHandler } from "../functions/postViewFunctions";
 
-export default function PostsView({ userId, userLikedPosts, filters }) {
+export default function PostsView({
+    userId,
+    userLikedPosts,
+    filters,
+    profilePage,
+}) {
     const [posts, setPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState(
         Array.isArray(userLikedPosts)
@@ -17,10 +22,6 @@ export default function PostsView({ userId, userLikedPosts, filters }) {
 
     useEffect(() => {
         async function getPosts() {
-            /*const response = await axios.get(
-                `/posts?user=${userId}${filters ? "&filters=" + filters : ""}`
-            );*/
-
             const response = await axios.get("/posts", {
                 params: {
                     user: userId,
@@ -29,8 +30,7 @@ export default function PostsView({ userId, userLikedPosts, filters }) {
             });
 
             if (response.status === 200) {
-                console.log(response.data.postsData);
-                console.log(response.data.filters);
+                console.log(response.data.message);
                 setPosts(response.data.postsData);
             }
         }
@@ -87,7 +87,10 @@ export default function PostsView({ userId, userLikedPosts, filters }) {
     }
 
     return (
-        <div className="w-1/2 h-full max-h-full flex flex-col items-center overflow-y-scroll gap-10">
+        <div
+            className="w-1/2 h-full max-h-full flex flex-col items-center overflow-y-scroll gap-10"
+            style={profilePage ? { width: "100%" } : {}}
+        >
             {posts.map((post, index) => (
                 <div
                     key={post.id}
