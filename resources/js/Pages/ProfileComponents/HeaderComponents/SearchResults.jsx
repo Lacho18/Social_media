@@ -2,8 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ProfileSideBar from "../ProfileSideBar";
 
-//Logicata e pravilna. Napravi takache da visualizirash resultatite
-
 export default function SearchResult({ searchText, userRequests }) {
     const [findResults, setFindUsers] = useState([]);
 

@@ -34,7 +34,10 @@ export default function ProfileSideBar({
                         (!sendedRequests.includes(user.id) ? (
                             <button
                                 className="bg-blue-950 p-2 rounded-xl border-2 border-blue-800"
-                                onClick={() => friendRequestHandler(user.id)}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    friendRequestHandler(user.id);
+                                }}
                             >
                                 Add friend
                             </button>

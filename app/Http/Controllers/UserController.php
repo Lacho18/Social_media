@@ -131,11 +131,11 @@ class UserController extends Controller
 
     public function deleteUser($id) {
         //Deletes the user
-        $user = User::find($user);
+        $user = User::find($id);
 
         //Deleting user comments
         $deletedComments = Comments::where('userId', $id)->pluck('id')->toArray();
-        Comments::where('postId', $id)->delete();
+        Comments::where('userId', $id)->delete();
 
         Post::all()->each(function ($post) use ($deletedComments, $id, $user) {
             //Deletes the post if the poster is the deleted user  
@@ -162,6 +162,8 @@ class UserController extends Controller
         });
 
         $user->delete();
+
+        return redirect('/');  
     }
 
     public function searchUsers(Request $request) {
