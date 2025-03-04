@@ -36,6 +36,7 @@ export default function ProfileSideBar({
                                 className="bg-blue-950 p-2 rounded-xl border-2 border-blue-800"
                                 onClick={(e) => {
                                     e.stopPropagation();
+                                    e.preventDefault();
                                     friendRequestHandler(user.id);
                                 }}
                             >

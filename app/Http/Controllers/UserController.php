@@ -137,6 +137,24 @@ class UserController extends Controller
         $deletedComments = Comments::where('userId', $id)->pluck('id')->toArray();
         Comments::where('userId', $id)->delete();
 
+        User::all()->each(function ($currentUser) use ($id) {
+            //Removes the deleted user id from friends list if there
+            $userFriends = $currentUser->friends;
+            $userFriends = array_filter($userFriends, function ($friendID) use ($id) {
+                return $friendID != $id;
+            });
+            $currentUser->friends = $userFriends;
+
+            //Removes the requests of the deleted user
+            $userRequests = $currentUser->requests;
+            $userRequests = array_filter($userRequests, function ($request) use ($id) {
+                return $request["senderId"] != $id;
+            });
+            $currentUser->requests = $userRequests;
+
+            $currentUser->save();
+        });
+
         Post::all()->each(function ($post) use ($deletedComments, $id, $user) {
             //Deletes the post if the poster is the deleted user  
             if($post->poster == $id) {
