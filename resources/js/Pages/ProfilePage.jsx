@@ -2,6 +2,7 @@ import { usePage } from "@inertiajs/react";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useGlobalState } from "./context/userContext";
+import PostsView from "./ProfileComponents/PostsView";
 
 export default function ProfilePage() {
     const { userId } = usePage().props;
@@ -132,7 +133,11 @@ export default function ProfilePage() {
                     </div>
                 </div>
                 <div className="border-t-2 border-gray-700 rounded-xl m-4 p-2">
-                    <p>Hello</p>
+                    <PostsView
+                        userId={globalUser.id}
+                        likedPosts={globalUser.likedPosts}
+                        filters={[{ id: userId }]}
+                    />
                 </div>
             </div>
         </div>

@@ -5,18 +5,24 @@ import PostCommentsSection from "./PostCommentsSection";
 
 import { deletePostHandler } from "../functions/postViewFunctions";
 
-export default function PostsView({ userId, userLikedPosts }) {
+export default function PostsView({ userId, userLikedPosts, filters }) {
     const [posts, setPosts] = useState([]);
-    const [likedPosts, setLikedPosts] = useState(userLikedPosts);
+    const [likedPosts, setLikedPosts] = useState(
+        Array.isArray(userLikedPosts)
+            ? userLikedPosts
+            : Object.values(userLikedPosts)
+    );
     const [commentsIndexes, setCommentsIndexes] = useState([]);
     const [postMenu, setPostMenu] = useState(-1);
 
     useEffect(() => {
         async function getPosts() {
-            const response = await axios.get("/posts?user=" + userId);
+            const response = await axios.get(
+                `/posts?user=${userId}${filters ? "&filters=" + filters : ""}`
+            );
 
             if (response.status === 200) {
-                console.log(response.data.message);
+                console.log(response.data.postsData);
                 setPosts(response.data.postsData);
             }
         }

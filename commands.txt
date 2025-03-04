@@ -1,4 +1,4 @@
 git add .
-git commit -m "Fixing bug with deleting user function"
+git commit -m "Fixing bug with PostsView component"
 git branch -M main
 git push -u origin main

@@ -13,6 +13,8 @@ export default function Profile() {
     const { user } = usePage().props;
     const { globalUser, setGlobalUser } = useGlobalState();
 
+    console.log(globalUser);
+
     useEffect(() => {
         if (user) {
             setGlobalUser(user);
@@ -85,6 +87,7 @@ export default function Profile() {
                 <PostsView
                     userId={globalUser.id}
                     userLikedPosts={globalUser.likedPosts}
+                    filters={undefined}
                 />
                 <RecommendationsSideBar
                     currentUserId={globalUser.id}
