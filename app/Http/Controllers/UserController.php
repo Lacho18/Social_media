@@ -141,7 +141,7 @@ class UserController extends Controller
             //Deletes the post if the poster is the deleted user  
             if($post->poster == $id) {
                 $post->delete();
-                continue;
+                return;
             }
 
             //Deletes all the comments from every post of the deleted user

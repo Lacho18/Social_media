@@ -5,6 +5,12 @@ import axios from "axios";
 import { useForm } from "@inertiajs/react";
 
 export default function CreatePost() {
+    /*
+        1. Na personalnata stranica napravi taka che da se visualizirat samo postovete na selectiraniq potrebitel.
+        2. Napravi tursachkata da tursi po imena
+        3. Postovete da se sortirat po data ako moje v PostsView.jsx
+    */
+
     const { globalUser, setGlobalUser } = useGlobalState();
 
     const { data, setData, post } = useForm({
