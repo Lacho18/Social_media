@@ -150,7 +150,7 @@ class UserController extends Controller
             if(is_array($postComments)) {
                 $updatedComments = array_values(array_diff($postComments, $deletedComments));
 
-                $post->comments = $updatedComments;
+                $post->comments = $updatedComments;       
             }
 
             //Decrements the likes counter if the deleted user has liked the post

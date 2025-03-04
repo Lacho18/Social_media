@@ -1,8 +1,7 @@
 import { useForm } from "@inertiajs/react";
-import axios from "axios";
 
 export default function DeleteProfile({ userId, denyDeletingProfile }) {
-    const { post, delete: destroy } = useForm();
+    const { delete: destroy } = useForm();
 
     async function deleteProfileHandler() {
         destroy("/users/" + userId);

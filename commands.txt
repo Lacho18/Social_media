@@ -1,4 +1,4 @@
 git add .
-git commit -m "Adding visual button for deleting profile"
+git commit -m "Testing delete user function"
 git branch -M main
 git push -u origin main
