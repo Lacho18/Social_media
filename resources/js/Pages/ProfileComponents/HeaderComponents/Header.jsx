@@ -49,7 +49,12 @@ export default function Header({
                 </button>
             </div>
             {menu && <MenusView userRequests={userRequests} userId={userId} />}
-            {searchText !== "" && <SearchResult searchText={searchText} />}
+            {searchText !== "" && (
+                <SearchResult
+                    searchText={searchText}
+                    userRequests={userRequests}
+                />
+            )}
         </div>
     );
 }

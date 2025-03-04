@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import ProfileSideBar from "../ProfileSideBar";
 
-export default function SearchResult({ searchText }) {
+//Logicata e pravilna. Napravi takache da visualizirash resultatite
+
+export default function SearchResult({ searchText, userRequests }) {
     const [findResults, setFindUsers] = useState([]);
 
     useEffect(() => {
@@ -25,8 +28,16 @@ export default function SearchResult({ searchText }) {
     }, [searchText]);
 
     return (
-        <div className="w-1/3 h-32 rounded bg-gray-800 absolute left-1/2 top-14 z-30 transform -translate-x-1/2 p-3">
-            <p>Putki</p>
+        <div className="w-1/3 h-1/3 rounded bg-gray-800 absolute left-1/2 top-14 z-30 transform -translate-x-1/2 p-3 overflow-y-scroll">
+            {findResults.map((result) => (
+                <ProfileSideBar
+                    key={result.id}
+                    user={result}
+                    addButton={false}
+                    friendRequestHandler={() => {}}
+                    sendedRequests={userRequests}
+                />
+            ))}
         </div>
     );
 }

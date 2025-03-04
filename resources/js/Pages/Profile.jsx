@@ -13,8 +13,6 @@ export default function Profile() {
     const { user } = usePage().props;
     const { globalUser, setGlobalUser } = useGlobalState();
 
-    console.log(globalUser);
-
     useEffect(() => {
         if (user) {
             setGlobalUser(user);

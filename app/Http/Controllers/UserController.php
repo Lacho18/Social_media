@@ -177,7 +177,7 @@ class UserController extends Controller
 
         $users = User::query()
                     ->when(is_array($searchWords), function($query) use ($searchWords) {
-                        return $query()->where($searchWords);
+                        return $query->where($searchWords);
                     })
                     ->when(!is_array($searchWords), function($query) use ($searchWords) {
                         return $query->where(function ($query) use ($searchWords) {
