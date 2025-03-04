@@ -163,4 +163,35 @@ class UserController extends Controller
 
         $user->delete();
     }
+
+    public function searchUsers(Request $request) {
+        $searchText = $request->query('searchText');
+        $searchWords = explode(" ", $searchText);
+
+        if(count($searchWords) == 2) {
+            $searchWords = ['firstName' => $searchWords[0], 'lastName' => $searchWords[1]];
+        }
+        else {
+            $searchWords = $searchWords[0];
+        }
+
+        $users = User::query()
+                    ->when(is_array($searchWords), function($query) use ($searchWords) {
+                        return $query()->where($searchWords);
+                    })
+                    ->when(!is_array($searchWords), function($query) use ($searchWords) {
+                        return $query->where(function ($query) use ($searchWords) {
+                            $query->where('firstName', 'like', '%' . $searchWords . '%')
+                                  ->orWhere('lastName', 'like', '%' . $searchWords . '%');
+                        });
+                    })
+                    ->get();
+        
+        if(count($users) == 0) {
+            return response()->json(['message' => "No users found", 'users' => []]);
+        }
+        else {
+            return response()->json(['message' => "Users found", 'users' => $users]);
+        }
+    }
 }

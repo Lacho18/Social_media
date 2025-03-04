@@ -86,6 +86,17 @@ export default function PostsView({
         }
     }
 
+    if (posts.length === 0) {
+        return (
+            <div
+                className="w-1/2 h-full max-h-full flex flex-col items-center"
+                style={profilePage ? { width: "100%" } : {}}
+            >
+                <p className="text-lg font-bold">No posts so far</p>
+            </div>
+        );
+    }
+
     return (
         <div
             className="w-1/2 h-full max-h-full flex flex-col items-center overflow-y-scroll gap-10"

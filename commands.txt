@@ -1,4 +1,4 @@
 git add .
-git commit -m "Fixing bug with profile page friends logic"
+git commit -m "Creating functionality for searching users"
 git branch -M main
 git push -u origin main

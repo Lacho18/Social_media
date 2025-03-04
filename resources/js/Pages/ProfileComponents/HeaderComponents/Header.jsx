@@ -1,5 +1,6 @@
 import { useState } from "react";
 import MenusView from "./MenusView";
+import SearchResult from "./SearchResults";
 
 export default function Header({
     userId,
@@ -10,6 +11,7 @@ export default function Header({
     onImageClick,
 }) {
     const [menu, setMenu] = useState(false);
+    const [searchText, setSearchText] = useState("");
 
     return (
         <div className="flex w-full h-16 bg-blue-900 justify-between items-center pl-4 pr-4">
@@ -29,7 +31,11 @@ export default function Header({
                 </div>
             </div>
             <div>
-                <input type="text" placeholder="🔍 Search" />
+                <input
+                    type="text"
+                    placeholder="🔍 Search"
+                    onChange={(e) => setSearchText(e.target.value)}
+                />
             </div>
             <div>
                 <button
@@ -43,6 +49,7 @@ export default function Header({
                 </button>
             </div>
             {menu && <MenusView userRequests={userRequests} userId={userId} />}
+            {searchText !== "" && <SearchResult searchText={searchText} />}
         </div>
     );
 }
