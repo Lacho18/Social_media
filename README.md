@@ -20,7 +20,7 @@ A framework that connects Laravel (or other backends) with modern frontend frame
 
 A JavaScript library for building dynamic and interactive user interfaces using a component-based architecture and a virtual DOM for efficient rendering.
 
-## Tailwind
+## Tailwind      
 
 A utility-first CSS framework that enables rapid UI development by applying pre-defined classes directly in HTML or JSX without writing custom CSS.
 
