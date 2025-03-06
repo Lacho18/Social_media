@@ -4,7 +4,7 @@
 
 This is a personal project presenting a social media. This application allows users to create posts, like and comment them and sending and accepting friend requests.
 
-# Technologies
+# Technologies      
 
 For server side is used the PHP framework Laravel. For client side is used React.js, Tailwind and Inertia.js. The database is PostgreSQL.
 
